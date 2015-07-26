@@ -49,9 +49,9 @@ group :production, :test do
 end
 
 gem 'nokogiri'
-gem 'capybara'
-gem 'poltergeist'
-gem 'phantomjs', require: 'phantomjs/poltergeist'
+# gem 'capybara'
+# gem 'poltergeist'
+# gem 'phantomjs', require: 'phantomjs/poltergeist'
 
 gem 'devise'
 gem 'rolify'
