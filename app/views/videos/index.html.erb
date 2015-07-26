@@ -1,0 +1,26 @@
+<h1>Videos</h1>
+
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Title</th>
+				<th>Site</th>
+				<th colspan="2"></th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<% @videos.each do |video| %>
+			<tr>
+				<td><%= link_to video.title, video_path(video, modal: true), data: {toggle: :modal, target: '#defaultModal'} %></td>
+				<td><%= video.site.domain %></td>
+				<td><%= link_to 'Edit', edit_video_path(video) %></td>
+				<td><%= link_to 'Destroy', video, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
+
+<%= link_to 'New Video', new_video_path %>

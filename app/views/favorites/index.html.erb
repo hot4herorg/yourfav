@@ -1,0 +1,23 @@
+<h1>Your Favorites</h1>
+
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Video Title</th>
+				<th></th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<% @favorites.each do |favorite| %>
+			<tr>
+				<td><%= link_to favorite.video.try(:title), video_path(favorite.video, modal: true), data: {toggle: :modal, target: '#defaultModal'} %></td>
+				<td><%= link_to 'Destroy', [@user, favorite], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
+
+<%= link_to 'New Favorite', new_user_favorite_path(@user) %>

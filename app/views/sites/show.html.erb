@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @site.name %>
+</p>
+
+<p>
+  <strong>Domain:</strong>
+  <%= @site.domain %>
+</p>
+
+<p>
+  <strong>Embed code:</strong>
+  <%= @site.embed_code %>
+</p>
+
+<p>
+  <strong>Login address:</strong>
+  <%= @site.login_address %>
+</p>
+
+<p>
+  <strong>Login method:</strong>
+  <%= @site.login_method %>
+</p>
+
+<p>
+  <strong>Ph network:</strong>
+  <%= @site.ph_network %>
+</p>
+
+<p>
+  <strong>Enabled:</strong>
+  <%= @site.enabled %>
+</p>
+
+<%= link_to 'Edit', edit_site_path(@site) %> |
+<%= link_to 'Back', sites_path %>
