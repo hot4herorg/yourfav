@@ -7,7 +7,7 @@ class FavoritesController < ApplicationController
 
 	def index
 		# @favorites = Favorite.all
-		@favorites = current_user.favorites
+		@favorites = current_user.favorites.enabled
 	end
 
 	def new

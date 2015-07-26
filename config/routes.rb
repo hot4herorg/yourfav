@@ -6,7 +6,11 @@ Rails.application.routes.draw do
 		resources :favorites, except: [:show, :edit, :update]
 	end
 
-	resources :videos
+	resources :videos do
+		member do
+			get 'toggle_favorite', path: 'toggle-favorite'
+		end
+	end
 
 	resources :sites
 

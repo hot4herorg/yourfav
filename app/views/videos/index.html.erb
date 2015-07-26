@@ -4,6 +4,7 @@
 	<table class="table table-striped">
 		<thead>
 			<tr>
+				<th></th>
 				<th>Title</th>
 				<th>Site</th>
 				<th colspan="2"></th>
@@ -13,6 +14,7 @@
 		<tbody>
 			<% @videos.each do |video| %>
 			<tr>
+				<td><%= toggle_favorite_link(video, false) -%></td>
 				<td><%= link_to video.title, video_path(video, modal: true), data: {toggle: :modal, target: '#defaultModal'} %></td>
 				<td><%= video.site.domain %></td>
 				<td><%= link_to 'Edit', edit_video_path(video) %></td>

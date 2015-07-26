@@ -4,16 +4,19 @@
 	<table class="table table-striped">
 		<thead>
 			<tr>
-				<th>Video Title</th>
 				<th></th>
+				<th>Video Title</th>
+				<th>Site</th>
 			</tr>
 		</thead>
 
 		<tbody>
 			<% @favorites.each do |favorite| %>
 			<tr>
+				<td><%= toggle_favorite_link(favorite.video, false) -%></td>
 				<td><%= link_to favorite.video.try(:title), video_path(favorite.video, modal: true), data: {toggle: :modal, target: '#defaultModal'} %></td>
-				<td><%= link_to 'Destroy', [@user, favorite], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+				<td><%= favorite.video.site.domain -%></td>
+				<!-- <td><%#= link_to 'Destroy', [@user, favorite], method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
 			</tr>
 			<% end %>
 		</tbody>

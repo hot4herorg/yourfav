@@ -7,7 +7,7 @@ module Scraper
 
 		attr_accessor :scrapee_url
 
-		validates :scrapee_url, format: URI::regexp(%w(http https)), allow_blank: false
+		validates :scrapee_url, format: URI::regexp(%w(http https)), allow_blank: true
 		validate :validate_url_has_video
 
 	end
@@ -20,6 +20,9 @@ module Scraper
 			site: Site.find_or_create_by( domain: get_video_domain(scrapee_url) ),
 			key: get_video_key(scrapee_url)
 		}
+
+		puts video_attributes
+		# false
 
 		self.video = Video.find_or_create_by video_attributes do |new_video|
 			new_video.title = get_video_title(scrapee_url)
@@ -88,6 +91,7 @@ module Scraper
 	end
 
 	def validate_url_has_video
+		return true unless self.scrapee_url.present?
 		url = self.scrapee_url
 		case get_video_domain(url)
 		when 'pornhub.com'

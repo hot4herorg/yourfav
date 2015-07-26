@@ -11,15 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150725215231) do
+ActiveRecord::Schema.define(version: 20150726182701) do
 
   create_table "favorites", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "video_id"
-    t.boolean  "enabled"
+    t.boolean  "enabled",    default: true
     t.integer  "position"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   add_index "favorites", ["user_id"], name: "index_favorites_on_user_id"
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20150725215231) do
 
   create_table "videos", force: :cascade do |t|
     t.string   "title"
-    t.integer  "key"
+    t.string   "key"
     t.integer  "site_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

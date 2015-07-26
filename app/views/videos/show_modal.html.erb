@@ -11,11 +11,10 @@
 			<iframe src="<%= @video.embed_code -%>" frameborder="0" scrolling="no" class="embed-responsive-item"></iframe>
 		</div>
 
-		<% if false -%>
 		<div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			<%= toggle_favorite_link(@video) -%>
+			<button type="button" class="btn btn-warning btn-sm" data-dismiss="modal">Close</button>
 		</div>
-		<% end -%>
 
 	</div>
 </div>

@@ -1,8 +1,27 @@
 class Video < ActiveRecord::Base
 
 	belongs_to :site
-	has_many :favorites
+	has_many :favorites, dependent: :destroy
 	has_many :users, through: :favorites
+
+	default_scope { includes(:favorites) }
+
+	def is_favorited?(user, return_btn_class=false)
+		fav = self.favorites.find_by(user: user)
+		btn_class = fav.try(:enabled) ? 'danger' : 'default'
+		return_btn_class ? btn_class : fav.try(:enabled)
+	end
+
+	def toggle_favorite(user)
+		if user
+			fav = Favorite.find_or_create_by(video: self, user: user) do |f|
+				f.was_created = true
+			end
+			fav.update_column( :enabled, !self.is_favorited?(user) ) unless fav.was_created
+		else
+			false
+		end
+	end
 
 	def embed_code
 		case self.site.domain
