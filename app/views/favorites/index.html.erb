@@ -13,7 +13,7 @@
 		<tbody>
 			<% @favorites.each do |favorite| %>
 			<tr>
-				<td><%= toggle_favorite_link(favorite.video, false) -%></td>
+				<td><%= toggle_favorite_link(favorite.video, text: false, size: :xs) -%></td>
 				<td><%= link_to favorite.video.try(:title), video_path(favorite.video, modal: true), data: {toggle: :modal, target: '#defaultModal'} %></td>
 				<td><%= favorite.video.site.domain -%></td>
 			</tr>

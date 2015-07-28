@@ -12,8 +12,24 @@
 		</div>
 
 		<div class="modal-footer">
+
+			<!-- Split button -->
+			<div class="btn-group dropup pull-left">
+				<button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<%= fa_icon('plus') -%>
+					<span class="sr-only">Toggle Dropdown</span>
+				</button>
+				<ul class="dropdown-menu">
+					<li><a href="#">Marage Playlists</a></li>
+					<li role="separator" class="divider"></li>
+					<li><a href="#">Playlist 2</a></li>
+					<li><a href="#">Playlist 1</a></li>
+				</ul>
+				<button type="button" class="btn btn-sm btn-primary"><%= fa_icon('th', text: 'Add to Quick Gallery') -%></button>
+			</div>
+
 			<%= toggle_favorite_link(@video) -%>
-			<button type="button" class="btn btn-warning btn-sm" data-dismiss="modal">Close</button>
+			<!-- <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button> -->
 		</div>
 
 	</div>

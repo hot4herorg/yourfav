@@ -4,7 +4,13 @@ class Video < ActiveRecord::Base
 	has_many :favorites, dependent: :destroy
 	has_many :users, through: :favorites
 
-	default_scope { includes(:favorites) }
+	default_scope {
+		includes(:favorites)
+		.joins("LEFT OUTER JOIN favorites ON videos.id = favorites.video_id")
+		.select("videos.*, SUM(CASE WHEN favorites.enabled = 't' THEN 1 ELSE 0 END) AS enabled_favorites_count")
+		.group("videos.id")
+		.order("enabled_favorites_count desc, videos.created_at desc")
+	}
 
 	def is_favorited?(user, return_btn_class=false)
 		fav = self.favorites.find_by(user: user)

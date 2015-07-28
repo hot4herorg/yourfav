@@ -17,8 +17,8 @@
 		<div class="collapse navbar-collapse" id="main-navbar-collapse-1">
 
 			<ul class="nav navbar-nav">
-				<%= content_tag :li, link_to('Home', root_url) -%>
-				<%= content_tag :li, link_to('Videos', videos_path) -%>
+				<%= content_tag :li, link_to(fa_icon('home', text: 'Home'), root_url) -%>
+				<%= content_tag :li, link_to(fa_icon('film', text: 'Videos'), videos_path) -%>
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">

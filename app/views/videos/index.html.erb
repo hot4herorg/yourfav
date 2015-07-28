@@ -14,7 +14,7 @@
 		<tbody>
 			<% @videos.each do |video| %>
 			<tr>
-				<td><%= toggle_favorite_link(video, false) -%></td>
+				<td><%= toggle_favorite_link(video, text: false, size: :xs) -%></td>
 				<td><%= link_to video.title, video_path(video, modal: true), data: {toggle: :modal, target: '#defaultModal'} %></td>
 				<td><%= video.site.domain %></td>
 				<td><%= link_to 'Edit', edit_video_path(video) %></td>

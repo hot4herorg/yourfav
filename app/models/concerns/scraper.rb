@@ -20,15 +20,13 @@ module Scraper
 			site: Site.find_or_create_by( domain: get_video_domain(scrapee_url) ),
 			key: get_video_key(scrapee_url)
 		}
-
 		puts video_attributes
-		# false
 
 		self.video = Video.find_or_create_by video_attributes do |new_video|
 			new_video.title = get_video_title(scrapee_url)
 		end
 
-		save
+		self.save
 	rescue
 		false
 	end
