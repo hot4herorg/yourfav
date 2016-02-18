@@ -13,5 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap.min
-//= require cocoon
+//= require jquery.infinitescroll
+//= require masonry.min
+//= require imagesLoaded.min
 //= require_tree .

@@ -1,7 +1,13 @@
-<h1>Videos</h1>
+<p id="notice"><%= notice %></p>
 
-<div class="row">
-	<%= render @videos, img_width: 150 -%>
+<%= link_to 'Add Video', new_video_path, class: 'pull-right' %>
+
+<h1>All Videos</h1>
+
+<div class="row" id="videos">
+	<%= render partial: 'videos/video_thumb', collection: @videos, as: :video %>
 </div>
 
-<%= link_to 'New Video', new_video_path %>
+<div class="pagination-container text-center">
+	<%= paginate @videos %>
+</div>

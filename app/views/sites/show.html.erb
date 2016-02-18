@@ -1,39 +1,16 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @site.name %>
-</p>
+<h1>
+	<%= @site.name %>
+</h1>
 
-<p>
-  <strong>Domain:</strong>
-  <%= @site.domain %>
-</p>
+<div class="row masonry-container" id="videos">
+	<%= render partial: 'videos/video_thumb', collection: @videos, as: :video %>
+</div>
 
-<p>
-  <strong>Embed code:</strong>
-  <%= @site.embed_code %>
-</p>
-
-<p>
-  <strong>Login address:</strong>
-  <%= @site.login_address %>
-</p>
-
-<p>
-  <strong>Login method:</strong>
-  <%= @site.login_method %>
-</p>
-
-<p>
-  <strong>Ph network:</strong>
-  <%= @site.ph_network %>
-</p>
-
-<p>
-  <strong>Enabled:</strong>
-  <%= @site.enabled %>
-</p>
+<div class="pagination-container text-center">
+	<%= paginate @videos %>
+</div>
 
 <%= link_to 'Edit', edit_site_path(@site) %> |
 <%= link_to 'Back', sites_path %>

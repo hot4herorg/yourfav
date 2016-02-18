@@ -1,27 +1,30 @@
-Rails.application.routes.draw do  
+Rails.application.routes.draw do
 
-  resources :thumbnails
-	devise_for :users
-	
-	resources :users, only: [:show] do
-		resources :favorites, except: [:show, :edit, :update]
+	namespace :api do
+		resources :videos, param: :url
+		# resources :sites, :videos
+		# get '/vidoes/:url' => 'videos#new', as: :new_video
 	end
+
+	resources :galleries
+
+	devise_for :users
 
 	resources :videos do
-		collection do
-			get 'selector'
-		end
-		member do
-			get 'toggle_favorite', path: 'toggle-favorite'
-		end
+		# get '/details/:id' => 'videos#get_video_details'
+		post '/favorite' => 'favorites#create'
+		delete '/favorite' => 'favorites#destroy', as: :favorite_delete
+	end
+	get '/video_details' => 'videos#get_video_details', as: 'video_details'
+
+	get '/test' => 'videos#test'
+
+	resources :sites do
+		# get 'video/:key' => 'videos#show'
 	end
 
-	resources :quick_gallery, path: 'quick-gallery', except: [:create]
+	resources :users, only: [:show]
 
-	resources :sites
-
-	get 'static_pages/video_not_found', path: 'video-not-found'
-
-	root 'static_pages#index'
+	root 'videos#index'
 
 end

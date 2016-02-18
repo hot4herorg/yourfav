@@ -11,47 +11,28 @@
 </div>
 <% end %>
 
-<div class="row">
-
-	<div class="col-sm-8 col-sm-push-4">
-		<div class="form-group">
-			<%= f.label :scrapee_url, 'URL' %>
-			<%= f.text_field :scrapee_url, class: 'form-control' %>
-		</div>
-		<div class="form-group">
-			<%= f.label :title %>
-			<%= f.text_field :title, class: 'form-control' %>
-		</div>
-		<div class="form-group">
-			<%= f.label :key %>
-			<%= f.text_field :key, class: 'form-control' %>
-		</div>
-		<div class="form-group">
-			<%= f.label :site_id %>
-			<%= f.number_field :site_id, class: 'form-control' %>
-		</div>
-	</div>
-
-	<div class="col-sm-4 col-sm-pull-8">
-		<div class="panel panel-default">
-			<header class="panel-heading">
-				<h4 class="panel-title">Thumbnails</h4>
-			</header>
-			<ul id="nested_thumbnails" class="list-group">
-				<%= f.fields_for :thumbnails do |pic| -%>
-				<%= render 'form_thumbs', f: pic -%>
-				<% end -%>
-			</ul>
-			<footer class="panel-footer">
-				<%= link_to_add_association 'Add Thumbnail', f, :thumbnails, data: {association_insertion_node: '#nested_thumbnails', association_insertion_method: :append}, partial: 'videos/form_thumbs', class: 'btn btn-info btn-xs btn-block' %>
-			</footer>
-		</div>
-	</div>
-
+<div class="form-group">
+	<%= f.label :url %><br>
+	<%= f.text_field :url, class: 'form-control' %>
+</div>
+<div class="form-group">
+	<%= f.label :key %><br>
+	<%= f.text_field :key, class: 'form-control' %>
+</div>
+<div class="form-group">
+	<%= f.label :title %><br>
+	<%= f.text_field :title, class: 'form-control' %>
+</div>
+<div class="form-group">
+	<%= f.label :site_id %><br>
+	<%= f.select :site_id, Site.all.collect{ |s| [s.name, s.id] }, {include_blank: true}, class: 'form-control' %>
+</div>
+<div class="form-group">
+	<%= f.label :thumb_url %><br>
+	<%= f.text_field :thumb_url, class: 'form-control' %>
 </div>
 
 <div class="actions">
-	<%= f.submit nil, class: 'btn btn-primary' %>
+	<%= f.submit nil, class: 'btn btn-default' %>
 </div>
-
 <% end %>

@@ -1,0 +1,34 @@
+<%= form_for(@gallery) do |f| %>
+<% if @gallery.errors.any? %>
+<div id="error_explanation">
+	<h2><%= pluralize(@gallery.errors.count, "error") %> prohibited this gallery from being saved:</h2>
+
+	<ul>
+		<% @gallery.errors.full_messages.each do |message| %>
+		<li><%= message %></li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+
+<div class="field">
+	<%= f.label :name %><br>
+	<%= f.text_field :name %>
+</div>
+<div class="field">
+	<%= f.label :private %><br>
+	<%= f.check_box :private %>
+</div>
+
+
+<%= f.fields_for :gallery_videos do |video| %>
+<div class="form-group">
+	<%= video.select :video_id, Video.reorder(:title).collect{ |v| [v.title, v.id] }, {include_blank: true}, class: 'form-control' %>
+</div>
+<% end %>
+
+
+<div class="actions">
+	<%= f.submit %>
+</div>
+<% end %>

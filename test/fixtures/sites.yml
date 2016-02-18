@@ -4,8 +4,6 @@ one:
   name: MyString
   domain: MyString
   embed_code: MyString
-  login_address: MyString
-  login_method: MyString
   ph_network: false
   enabled: false
 
@@ -13,7 +11,5 @@ two:
   name: MyString
   domain: MyString
   embed_code: MyString
-  login_address: MyString
-  login_method: MyString
   ph_network: false
   enabled: false

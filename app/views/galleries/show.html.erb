@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @gallery.name %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%#= @gallery.user.email %>
+</p>
+
+<% @gallery.videos.each do |video| %>
+<%#= video.to_json %>
+<%= render 'videos/video_thumb', video: video %>
+<% end %>
+
+<%= link_to 'Edit', edit_gallery_path(@gallery) %> |
+<%= link_to 'Back', galleries_path %>

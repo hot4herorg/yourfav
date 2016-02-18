@@ -1,0 +1,30 @@
+<!-- Gallery Modal -->
+<div class="modal fade" id="gallery-modal" tabindex="-1" role="dialog" aria-labelledby="gallery-modal-label">
+	<div class="modal-dialog modal-gallery" role="document">
+		<div class="modal-content">
+			<div class="modal-header text-center">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<!-- <h4 class="modal-title" id="gallery-modal-label">Modal title</h4> -->
+				<a href="#" class="btn btn-sm btn-primary">Btn</a>
+				<a href="#" class="btn btn-sm btn-danger">Btn</a>
+			</div>
+			<div class="container-fluid">
+
+				<div class="row">
+					<% Video.last(4).reverse.each do |video| %>
+					<div class="col-sm-6">
+						<div class="thumbnail">
+							<%= render 'videos/embed', video: video %>
+						</div>
+					</div>
+					<% end %>
+				</div>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btm-sm btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btm-sm btn-primary">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<h1>
+	<%= @user.email %>'s Favorites
+</h1>
+
+<div class="row masonry-container" id="videos">
+	<%= render partial: 'videos/video_thumb', collection: @videos, as: :video %>
+</div>
+
+<div class="pagination-container text-center">
+	<%= paginate @videos %>
+</div>

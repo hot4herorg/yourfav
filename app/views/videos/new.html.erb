@@ -1,5 +1,37 @@
 <h1>New Video</h1>
 
-<%= render 'form' %>
+<div class="row">
+	<div class="col-sm-6">
+
+		<p>
+			<%= form_tag video_details_path, id: 'video_details', class: 'form-inline', method: :get, remote: true do %>
+			<div class="form-group">
+				<label for="url">URL</label>
+				<%= text_field_tag :url, nil, class: 'form-control' %>
+			</div>
+			<%= submit_tag 'Search', class: 'btn btn-primary' %>
+			<% end %>
+		</p>
+
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<%= render 'form' %>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="col-sm-6">
+		<div class="embed-responsive embed-responsive-16by9">
+			<iframe id="video_src" class="embed-responsive-item" src=""></iframe>
+		</div>
+
+		<div id="video_thumbs">
+
+		</div>
+		<%#= image_tag nil, id: 'video_thumb', class: 'img-responsive center-block' %>
+	</div>
+
+</div>
 
 <%= link_to 'Back', videos_path %>

@@ -1,0 +1,20 @@
+<%= content_tag_for :div, video, class: 'col-xs-6 col-sm-4 col-md-3' do %>
+<div class="panel panel-default">
+	<%= link_to video, data: {toggle: :modal, target: '#defaultModal'} do %>
+	<%= image_tag video.thumb_url, class: 'video-thumb img-responsive center-block', data: { original: video.thumb_url, slides: video.thumbnails_data } if video.thumbnail.present? %>
+	<% end %>
+	<div class="panel-body">
+		<h4>
+		<%= video.title %>
+		<br>
+		<small>
+			<%= link_to video.site.name, video.site %>
+		</small>
+	</h4>
+		<p class="text-right">
+			<%= favorite_btn video %>
+			<%= link_to '+ Gallery', video, class: 'btn btn-sm btn-primary' %>
+		</p>
+	</div>
+</div>
+<% end %>

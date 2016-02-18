@@ -1,14 +1,23 @@
-<% img_width ||= 75 %>
+<%= content_for :pre_container do %>
+<div class="" style="margin-top: -21px;">
+	<%= render 'videos/embed', video: video %>
+</div>
+<% end if is_videos_show_action? %>
 
-<%= link_to video, class: 'list-group-item' do %>
+<p id="notice"><%= notice %></p>
 
-<div class="media">
-	<div class="media-left">
-		<%= image_tag video.thumbnails.first.try(:image), width: img_width if video.thumbnails.any? %>
-	</div>
-	<div class="media-body">
-		<%= content_tag :h4, video.title, class: 'media-heading' %>
-	</div>
+<div class="row" id="thumbnails">
+	<%#= render video.thumbnails if video.thumbnails.any? %>
 </div>
 
-<% end %>
+<%= content_tag :h1, video.title if is_videos_show_action? %>
+
+<p>
+	<strong>Site:</strong>
+	<%= link_to video.site.name, video.site %>
+</p>
+
+<p>
+	<strong>Url:</strong>
+	<%= link_to 'Original Link', video.url, target: '_blank' %>
+</p>

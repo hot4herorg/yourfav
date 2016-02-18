@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  gallery_id: 
+  video_id: 
+
+two:
+  gallery_id: 
+  video_id: 

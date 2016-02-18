@@ -11,44 +11,59 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150803215814) do
+ActiveRecord::Schema.define(version: 20160131041754) do
 
-  create_table "favorites", force: :cascade do |t|
+  create_table "galleries", force: :cascade do |t|
+    t.string   "name"
     t.integer  "user_id"
-    t.integer  "video_id"
-    t.boolean  "enabled",    default: true
-    t.integer  "position"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.boolean  "private"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  add_index "favorites", ["user_id"], name: "index_favorites_on_user_id"
-  add_index "favorites", ["video_id"], name: "index_favorites_on_video_id"
+  add_index "galleries", ["user_id"], name: "index_galleries_on_user_id"
+
+  create_table "gallery_videos", force: :cascade do |t|
+    t.integer  "gallery_id"
+    t.integer  "video_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "gallery_videos", ["gallery_id"], name: "index_gallery_videos_on_gallery_id"
+  add_index "gallery_videos", ["video_id"], name: "index_gallery_videos_on_video_id"
+
+  create_table "marks", force: :cascade do |t|
+    t.integer  "marker_id"
+    t.string   "marker_type"
+    t.integer  "markable_id"
+    t.string   "markable_type"
+    t.string   "mark",          limit: 128
+    t.datetime "created_at"
+  end
+
+  add_index "marks", ["markable_id", "markable_type", "mark"], name: "index_marks_on_markable_id_and_markable_type_and_mark"
+  add_index "marks", ["marker_id", "marker_type", "mark"], name: "index_marks_on_marker_id_and_marker_type_and_mark"
 
   create_table "sites", force: :cascade do |t|
     t.string   "name"
     t.string   "domain"
     t.string   "embed_code"
-    t.string   "login_address"
-    t.string   "login_method"
     t.boolean  "ph_network"
-    t.boolean  "enabled"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.boolean  "enabled",    default: true
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "thumbnails", force: :cascade do |t|
-    t.string   "title"
-    t.text     "caption"
-    t.string   "alt"
-    t.integer  "imageable_id"
-    t.string   "imageable_type"
-    t.string   "image"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.string   "url"
+    t.integer  "video_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.boolean  "valid_status"
   end
 
-  add_index "thumbnails", ["imageable_type", "imageable_id"], name: "index_thumbnails_on_imageable_type_and_imageable_id"
+  add_index "thumbnails", ["video_id"], name: "index_thumbnails_on_video_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -69,11 +84,13 @@ ActiveRecord::Schema.define(version: 20150803215814) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
   create_table "videos", force: :cascade do |t|
-    t.string   "title"
+    t.string   "url"
     t.string   "key"
+    t.string   "title"
     t.integer  "site_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "thumb_url"
   end
 
   add_index "videos", ["site_id"], name: "index_videos_on_site_id"
