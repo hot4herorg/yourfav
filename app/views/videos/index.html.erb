@@ -1,28 +1,7 @@
 <h1>Videos</h1>
 
-<div class="table-responsive">
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th></th>
-				<th>Title</th>
-				<th>Site</th>
-				<th colspan="2"></th>
-			</tr>
-		</thead>
-
-		<tbody>
-			<% @videos.each do |video| %>
-			<tr>
-				<td><%= toggle_favorite_link(video, text: false, size: :xs) -%></td>
-				<td><%= link_to video.title, video_path(video, modal: true), data: {toggle: :modal, target: '#defaultModal'} %></td>
-				<td><%= video.site.domain %></td>
-				<td><%= link_to 'Edit', edit_video_path(video) %></td>
-				<td><%= link_to 'Destroy', video, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-			</tr>
-			<% end %>
-		</tbody>
-	</table>
+<div class="row">
+	<%= render @videos, img_width: 150 -%>
 </div>
 
 <%= link_to 'New Video', new_video_path %>

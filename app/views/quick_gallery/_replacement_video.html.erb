@@ -1,0 +1,14 @@
+<% img_width ||= 75 %>
+
+<%= link_to quick_gallery_path(video, replacement: video.id), method: :patch, remote: true, class: 'list-group-item' do %>
+
+<div class="media">
+	<div class="media-left">
+		<%= image_tag video.thumbnails.first.try(:image), width: img_width if video.thumbnails.any? %>
+	</div>
+	<div class="media-body">
+		<%= content_tag :h4, video.title, class: 'media-heading' %>
+	</div>
+</div>
+
+<% end %>

@@ -1,1 +1,7 @@
-$('.toggleFavVideo<%= @video.id %>').toggleClass('btn-default').toggleClass('btn-danger');
+if ( $('.toggle-fav-video-btn').length ) {
+	$('.toggle-fav-video-btn.toggle-fav-video-<%= @video.id %>').toggleClass('btn-default').toggleClass('btn-danger');
+}
+
+if ( $('.toggle-fav-video-panel').length ) {
+	$('.toggle-fav-video-panel.toggle-fav-video-<%= @video.id %>').toggleClass('panel-default').toggleClass('panel-danger');
+}

@@ -15,18 +15,19 @@ class FavoritesController < ApplicationController
 	end
 
 	def create
+		@video = Video.save_video_from_url()
 		@favorite = Favorite.new(favorite_params)
 		@favorite.user = current_user
 
-		respond_to do |format|
-			if @favorite.save_video_from_url
-				format.html { redirect_to user_favorites_path(@user), notice: 'Favorite was successfully created.' }
-				format.json { render :show, status: :created, location: @favorite }
-			else
-				format.html { render :new }
-				format.json { render json: @favorite.errors, status: :unprocessable_entity }
-			end
-		end
+		# respond_to do |format|
+		# 	if @favorite.save_favorite_from_url
+		# 		format.html { redirect_to user_favorites_path(@user), notice: 'Favorite was successfully created.' }
+		# 		format.json { render :show, status: :created, location: @favorite }
+		# 	else
+		# 		format.html { render :new }
+		# 		format.json { render json: @favorite.errors, status: :unprocessable_entity }
+		# 	end
+		# end
 	end
 
 	def destroy

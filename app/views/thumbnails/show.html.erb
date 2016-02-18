@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @thumbnail.title %>
+</p>
+
+<p>
+  <strong>Caption:</strong>
+  <%= @thumbnail.caption %>
+</p>
+
+<p>
+  <strong>Alt:</strong>
+  <%= @thumbnail.alt %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= @thumbnail.image %>
+</p>
+
+<%= link_to 'Edit', edit_thumbnail_path(@thumbnail) %> |
+<%= link_to 'Back', thumbnails_path %>

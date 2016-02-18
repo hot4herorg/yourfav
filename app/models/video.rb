@@ -1,11 +1,19 @@
 class Video < ActiveRecord::Base
 
+	include Scraper
+	include Imageable
+
 	belongs_to :site
 	has_many :favorites, dependent: :destroy
 	has_many :users, through: :favorites
 
+	validates :title, :key, :site_id, presence: true, unless: :scrapee_url?
+
+	before_save :save_video_from_url, if: :scrapee_url?
+	after_create :save_video_thumb, if: :scrapee_url?
+
 	default_scope {
-		includes(:favorites)
+		includes(:favorites, :site)
 		.joins("LEFT OUTER JOIN favorites ON videos.id = favorites.video_id")
 		.select("videos.*, SUM(CASE WHEN favorites.enabled = 't' THEN 1 ELSE 0 END) AS enabled_favorites_count")
 		.group("videos.id")
@@ -30,26 +38,30 @@ class Video < ActiveRecord::Base
 	end
 
 	def embed_code
+
+		'http://www.jizzhut.com/videos/embed/22935491'
+
 		case self.site.domain
 		when 'pornhub.com', 'youporn.com', 'keezmovies.com', 'tube8.com', 'extremetube.com'
-			"http://www.#{site.domain}/embed/#{key}"
+			"http://#{site.domain}/embed/#{key}"
+		when 'youjizz.com', 'jizzhut.com'
+			"http://#{site.domain}/videos/embed/#{key}"
 		when 'xvideos.com'
-			"http://flashservice.xvideos.com/embedframe/#{key}"
+			"http://flashservice.#{site.domain}/embedframe/#{key}"
 		when 'redtube.com'
-			"http://embed.redtube.com/?id=#{key}"
+			"http://embed.#{site.domain}/?id=#{key}"
 		when 'spankbang.com'
-			"http://spankbang.com/#{key}/embed/"
+			"http://#{site.domain}/#{key}/embed/"
 		when 'xtube.com'
-			"http://www.xtube.com/watch.php?v=#{key}"
-		when 'youjizz.com'
-			"http://www.youjizz.com/videos/embed/#{key}"
+			"http://www.#{site.domain}/watch.php?v=#{key}"
 		when 'xhamster.com'
-			"http://xhamster.com/xembed.php?video=#{key}"
+			"http://#{site.domain}/xembed.php?video=#{key}"
 		when 'spankwire.com'
-			"http://www.spankwire.com/EmbedPlayer.aspx?ArticleId=#{key}"
+			"http://www.#{site.domain}/EmbedPlayer.aspx?ArticleId=#{key}"
 		else
 			'/video-not-found'
 		end
+		# 'https://www.youtube.com/embed/oeeLAIhNe0I'
 	end
 
 end

@@ -2,7 +2,7 @@
 <html>
 <head>
 
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title><%= @brand ||= 'YourFavorite' -%></title>
 
@@ -26,6 +26,8 @@
 
 	<%= render 'layouts/nav', inverse: false -%>
 
+	<%= yield :pre_container %>
+
 	<div class="container">
 
 		<%= render 'layouts/flash' -%>
@@ -33,7 +35,7 @@
 		<%= yield %>
 
 	</div>
-	
+
 	<%#= render 'layouts/footer' -%>
 	<%= render 'layouts/default_modal' -%>
 

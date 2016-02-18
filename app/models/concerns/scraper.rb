@@ -5,6 +5,9 @@ module Scraper
 
 		require 'open-uri'
 
+		# include CapyScraper
+		# include ThumbnailScraper
+
 		attr_accessor :scrapee_url
 
 		validates :scrapee_url, format: URI::regexp(%w(http https)), allow_blank: true
@@ -16,14 +19,29 @@ module Scraper
 	end
 
 	def save_video_from_url
-		video_attributes = {
-			site: Site.find_or_create_by( domain: get_video_domain(scrapee_url) ),
-			key: get_video_key(scrapee_url)
-		}
-		puts video_attributes
+		unless Video.unscoped.where(video_attributes).any?
+			self.assign_attributes video_attributes(true)
+		else
+			errors[:base] << "Video already exists."
+			false
+		end
+	rescue
+		false
+	end
 
+	def save_video_thumb
+		if thumb = get_video_thumb(scrapee_url, self.title, true)
+			puts thumb
+			self.thumbnails.create(remote_image_url: thumb)
+		end
+	end
+
+	def save_favorite_from_url
 		self.video = Video.find_or_create_by video_attributes do |new_video|
 			new_video.title = get_video_title(scrapee_url)
+			if thumb = get_video_thumb(scrapee_url, self.video.title, true)
+				new_video.thumbnails.create(remote_image_url: thumb)
+			end
 		end
 
 		self.save
@@ -33,6 +51,38 @@ module Scraper
 
 	private
 
+	def scrapee_url?
+		self.scrapee_url.present?
+	end
+
+	def video_attributes(include_title=false)
+		video_attributes = {
+			site: Site.find_or_create_by( domain: get_video_domain(scrapee_url) ),
+			key: get_video_key(scrapee_url),
+		}
+		video_attributes[:title] = get_video_title(scrapee_url) if include_title
+		video_attributes
+	end
+
+	def get_video_thumb(url, title, site)
+		puts "Getting Video Thumbanil"
+
+		if site
+			page = noko_url 'http://www.pornmd.com/straight/' + title.gsub(' ', '+')
+
+			page.search('.thumb-container a').first(10).each_with_index do |link, index|
+				link_url = open("http://www.pornmd.com#{link['href'].to_s}").base_uri.to_s
+				thumb = link.children.css('img').attr('data-original')
+				return thumb if link_url == url
+			end
+			return false
+		else
+			return false
+		end
+	rescue
+		return false
+	end
+
 	def get_video_domain(url)
 		host = URI.parse(url).host.downcase
 		domain = host.start_with?('www.') ? host[4..-1] : host
@@ -41,7 +91,8 @@ module Scraper
 	def get_video_key(url)
 		case get_video_domain(url)
 		when 'pornhub.com'
-			key = URI.parse(url).query.to_s.gsub('viewkey=', '')
+			# key = URI.parse(url).query.to_s.gsub('viewkey=', '')
+			key = Rack::Utils.parse_query(URI(url).query)['viewkey']
 		when 'tube8.com', 'redtube.com'
 			key = URI.parse(url).path[1..-1]
 		when 'keezmovies.com', 'youporn.com', 'extremetube.com'
@@ -55,7 +106,7 @@ module Scraper
 		when 'spankbang.com'
 			key = URI.parse(url).path.match(/\/(.*)\/(.*?\/)/)[1]
 		else
-			key = 0
+			key = nil
 		end
 	end
 

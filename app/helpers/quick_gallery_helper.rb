@@ -1,0 +1,2 @@
+module QuickGalleryHelper
+end

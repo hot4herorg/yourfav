@@ -1,5 +1,7 @@
 class VideosController < ApplicationController
 
+	include ImageableBuilder
+
 	before_action :authenticate_user!, only: [:toggle_favorite]
 
 	before_action :set_video, only: [:show, :toggle_favorite, :edit, :update, :destroy]
@@ -18,9 +20,11 @@ class VideosController < ApplicationController
 
 	def new
 		@video = Video.new
+		@video.thumbnails.build
 	end
 
 	def edit
+		@video.thumbnails.build if @video.thumbnails.empty?
 	end
 
 	def create
@@ -28,7 +32,7 @@ class VideosController < ApplicationController
 
 		respond_to do |format|
 			if @video.save
-				format.html { redirect_to @video, notice: 'Video was successfully created.' }
+				format.html { redirect_to edit_video_path(@video), notice: 'Video was successfully created.' }
 				format.json { render :show, status: :created, location: @video }
 			else
 				format.html { render :new }
@@ -64,7 +68,7 @@ class VideosController < ApplicationController
 	end
 
 	def video_params
-		params.require(:video).permit(:title, :key, :site_id)
+		params.require(:video).permit(:scrapee_url, :title, :key, :site_id, thumbnails_attributes: image_params)
 	end
 
 end

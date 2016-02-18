@@ -1,3 +1,21 @@
-// Place all the styles related to the static_pages controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.embed-responsive-jumbo {
+
+	// margin-top: -21px;
+	height: 100%;
+	padding: 80px 20px 100px;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	z-index: -99;
+	overflow: hidden;
+
+	video {
+		min-width: 100%;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translateX(-50%) translateY(-50%);
+		z-index: -999;
+	}
+
+}

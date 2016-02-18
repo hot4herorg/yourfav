@@ -1,0 +1,33 @@
+
+</div>
+
+<div id="quick_gallery" class="jumbotron">
+
+	<div class="container-fluid">
+		<div class="row">
+			<% @videos.each do |video| -%>
+			<%= render 'show', video: video -%>
+			<% end -%>
+		</div>
+	</div>
+
+</div>
+
+<div class="container">
+
+	<header class="page-header">
+		<h1>Quick Galleries</h1>
+	</header>
+
+	<div class="row">
+		<div class="col-sm-4">
+			<div class="well lead">
+				Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+			</div>
+		</div>
+		<div class="col-sm-8">
+
+			Galleries
+
+		</div>
+	</div>

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do  
 
+  resources :thumbnails
 	devise_for :users
 	
 	resources :users, only: [:show] do
@@ -7,10 +8,15 @@ Rails.application.routes.draw do
 	end
 
 	resources :videos do
+		collection do
+			get 'selector'
+		end
 		member do
 			get 'toggle_favorite', path: 'toggle-favorite'
 		end
 	end
+
+	resources :quick_gallery, path: 'quick-gallery', except: [:create]
 
 	resources :sites
 

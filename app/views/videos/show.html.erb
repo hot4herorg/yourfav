@@ -1,18 +1,21 @@
-<p id="notice"><%= notice %></p>
+
+<div class="embed-responsive embed-responsive-16by9">
+	<iframe src="<%= @video.embed_code -%>" frameborder="0" scrolling="no" class="embed-responsive-item"></iframe>
+</div>
 
 <p>
-  <strong>Title:</strong>
-  <%= @video.title %>
+	<strong>Title:</strong>
+	<%= @video.title %>
 </p>
 
 <p>
-  <strong>Key:</strong>
-  <%= @video.key %>
+	<strong>Key:</strong>
+	<%= @video.key %>
 </p>
 
 <p>
-  <strong>Site:</strong>
-  <%= @video.site_id %>
+	<strong>Site:</strong>
+	<%= @video.site_id %>
 </p>
 
 <%= link_to 'Edit', edit_video_path(@video) %> |
