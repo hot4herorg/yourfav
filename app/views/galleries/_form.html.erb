@@ -20,12 +20,16 @@
 	<%= f.check_box :private %>
 </div>
 
-
-<%= f.fields_for :gallery_videos do |video| %>
-<div class="form-group">
-	<%= video.select :video_id, Video.reorder(:title).collect{ |v| [v.title, v.id] }, {include_blank: true}, class: 'form-control' %>
-</div>
-<% end %>
+<ul class="">
+	<% Video.reorder(:title).each do |video| %>
+	<li>
+		<label>
+			<%= check_box_tag "gallery[video_ids][]", video.id, f.object.videos.include?(video) %>
+			<%= video.title %>
+		</label>
+	</li>
+	<% end %>
+</ul>
 
 
 <div class="actions">

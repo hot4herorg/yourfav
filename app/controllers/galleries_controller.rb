@@ -75,6 +75,6 @@ class GalleriesController < ApplicationController
 
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def gallery_params
-		params.require(:gallery).permit(:name, :private, gallery_videos_attributes: [:video_id, :_destroy])
+		params.require(:gallery).permit(:name, :private, video_ids: [])
 	end
 end

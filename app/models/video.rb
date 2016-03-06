@@ -23,6 +23,10 @@ class Video < ActiveRecord::Base
 		PhnetworkScraper::Thumbnails.of self.site, self.thumb_url if self.thumb_url.present?
 	end
 
+	def enabled?
+		self.site.enabled
+	end
+
 	private
 
 	# def embed_code_old
