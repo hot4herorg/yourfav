@@ -1,19 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @gallery.name %>
-</p>
+<%= content_tag :h2, @gallery.name %>
 
-<p>
-  <strong>User:</strong>
-  <%#= @gallery.user.email %>
-</p>
+<%#= render @gallery.videos %>
 
-<% @gallery.videos.each do |video| %>
-<%#= video.to_json %>
-<%= render 'videos/video_thumb', video: video %>
-<% end %>
+<div class="row">
+	<% @gallery.videos.each do |video| %>
+	<div class="col-sm-6">
+		<%= render 'videos/embed', video: video %>
+		<%= link_to 'x Gallery', remove_video_from_gallery_path(@gallery, video), class: 'btn btn-sm btn-warning', remote: false, method: :delete if params[:controller] == 'galleries' %>
+	</div>
+	<% end %>
+</div>
+
+<hr>
 
 <%= link_to 'Edit', edit_gallery_path(@gallery) %> |
 <%= link_to 'Back', galleries_path %>

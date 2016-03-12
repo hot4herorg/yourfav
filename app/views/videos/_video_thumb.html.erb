@@ -13,7 +13,7 @@
 	</h4>
 		<p class="text-right">
 			<%= favorite_btn video %>
-			<%= link_to '+ Gallery', video, class: 'btn btn-sm btn-primary' %>
+			<%= link_to '+ Gallery', add_video_to_gallery_path(3, video), class: 'btn btn-sm btn-primary', remote: true, method: :put unless params[:controller] == 'galleries' %>
 		</p>
 	</div>
 </div>

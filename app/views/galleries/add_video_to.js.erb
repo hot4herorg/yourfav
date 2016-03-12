@@ -1,0 +1,19 @@
+// alert('added');
+
+$video_thumb = $("#video_" + <%= @video.id %> )
+
+var div2Pos = $("#default-gallery-btn").position();
+var div2Width = $("#default-gallery-btn").css("width");
+var div2Height = $("#default-gallery-btn").css("height");
+
+// console.log($video_thumb);
+
+$video_thumb.css({position: 'absolute', z_index: 9999}).animate({
+	left: div2Pos.left,
+	top: div2Pos.top,
+	width: div2Width,
+	height: div2Height,
+	opacity: 0
+}, 1500, function(){
+	$(this).hide();
+});

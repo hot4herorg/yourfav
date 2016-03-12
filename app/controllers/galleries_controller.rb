@@ -1,6 +1,6 @@
 class GalleriesController < ApplicationController
 
-	before_action :set_gallery, only: [:show, :edit, :update, :destroy]
+	before_action :set_gallery, only: [:show, :edit, :update, :destroy, :add_video_to, :remove_video_from]
 
 	# GET /galleries
 	# GET /galleries.json
@@ -12,6 +12,27 @@ class GalleriesController < ApplicationController
 	# GET /galleries/1.json
 	def show
 		render :modal, layout: false if request.xhr?
+	end
+
+	def add_video_to
+		if @video = Video.find(params[:video_id])
+			# if current_user.owns_gallery?(@gallery.id)
+			respond_to do |format|
+				if @gallery.videos << @video
+					format.html { redirect_to @gallery, notice: "Video was successfully added to #{@gallery.name}." }
+					format.js { render :add_video_to }
+				else
+					redirect_to @gallery, notice: "Video faild to be added to #{@gallery.name}."
+				end
+			end
+		end
+	end
+
+	def remove_video_from
+		if @video = Video.find(params[:video_id])
+			@gallery.videos.delete @video # if current_user.owns_gallery?(@gallery.id)
+			redirect_to @gallery, notice: "Video was successfully removed from #{@gallery.name}."
+		end
 	end
 
 	# GET /galleries/new

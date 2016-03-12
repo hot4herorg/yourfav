@@ -31,7 +31,7 @@
 
 				<%= content_tag :li, link_to('Add Video', new_video_path) %>
 				<%= content_tag :li, link_to('Galleries', galleries_path) %>
-				<%= content_tag :li, link_to('Gallery', Gallery.all.sample(1), data: {toggle: :modal, target: '#gallery-modal'}) %>
+				<%= content_tag :li, link_to('Gallery', Gallery.find(3), data: {toggle: :modal, target: '#gallery-modal'}), id: 'default-gallery-btn' %>
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
