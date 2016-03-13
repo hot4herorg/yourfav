@@ -1,4 +1,5 @@
 if (<%= @video.valid? %>) {
+
 	// form fields
 	$('#video_url').val('<%= j @video.url.to_s %>');
 	$('#video_key').val('<%= j @video.key.to_s %>');
@@ -6,7 +7,7 @@ if (<%= @video.valid? %>) {
 	$('#video_site_id').val('<%= j @video.site_id.to_s %>');
 	$('#video_thumb_url').val('<%= j @video.thumb_url.to_s %>');
 
-	// ifram source
+	// iframe source
 	$('#video_src').attr('src', '<%= j @video.embed_code.to_s %>');
 
 	// thumbnails
