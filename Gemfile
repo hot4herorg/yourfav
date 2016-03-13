@@ -45,7 +45,9 @@ group :development do
   gem 'spring'
 end
 
+# heroku
 gem 'pg', group: :production
+gem 'rails_12factor', group: :production
 
 gem 'nokogiri'
 gem 'devise'
