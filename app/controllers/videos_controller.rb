@@ -14,11 +14,35 @@ class VideosController < ApplicationController
 		render :modal, layout: false if request.xhr?
 	end
 
+	# GET /videos/:id/details
+	def get_video_details
+		@video = PhnetworkScraper::Video.new params[:url]
+		# render text: @video.to_json
+	end
+
 	def test
-		url = 'http://www.xvideos.com/video2541006/jessica_jaymes_-_milf_memoirs'
-		@video = PhnetworkScraper::Video.new url
-		render text: @video.to_json
-		# render text: @video.thumb_url
+		tests = []
+		urls = []
+
+		# urls << 'http://www.pornhub.com/view_video.php?viewkey=1251583109'
+		# urls << 'http://www.keezmovies.com/video/blonde-teen-pornstar-ride-babe-doggy-small-tits-hd-1080p-7935781'
+		# urls << 'http://www.extremetube.com/video/fetishnetwork-renee-roulette-bondage-sex-on-couch-12658461'
+		# urls << 'http://www.youporn.com/watch/629938/brunette-masturbates-in-bedroom/'
+		# urls << 'http://spankbang.com/3uji/video/julia+roca+fucks+yoga+instructor'
+		# urls << 'http://www.redtube.com/338814'
+		# urls << 'http://xhamster.com/movies/4754837/nubilefilms_the_taste_of_passionate_fuck.html'
+		# urls << 'http://www.tube8.com/teen/moms-teach-sex/28339511/'
+		# urls << 'http://www.xtube.com/watch.php?v=Wdnhm-S689-'
+		# urls << 'http://www.spankwire.com/TUSHY-Personal-Assistant-Janice-Griffith-Loves-Anal/video2582271/'
+		# urls << 'http://www.xvideos.com/video2541006/jessica_jaymes_-_milf_memoirs'
+
+		urls.each do |url|
+			tests << PhnetworkScraper::Video.new(url).thumb_url
+		end
+
+		# @video = PhnetworkScraper::Video.new urls[1]
+		# render text: @video.to_json
+		render text: tests.first
 	end
 
 	# GET /videos/new
@@ -69,11 +93,6 @@ class VideosController < ApplicationController
 			format.html { redirect_to videos_url, notice: 'Video was successfully destroyed.' }
 			format.json { head :no_content }
 		end
-	end
-
-	# GET /videos/:id/details
-	def get_video_details
-		@video = PhnetworkScraper::Video.new params[:url]
 	end
 
 	private

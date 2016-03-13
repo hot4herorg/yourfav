@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 	end
 	get '/video_details' => 'videos#get_video_details', as: 'video_details'
 
-	get '/test' => 'videos#test'
+	get '/test', to: 'videos#test'
 
 	resources :sites do
 		# get 'video/:key' => 'videos#show'
