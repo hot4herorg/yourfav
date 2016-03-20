@@ -1,5 +1,6 @@
 class GalleriesController < ApplicationController
 
+	before_action :set_user, except: []
 	before_action :set_gallery, only: [:show, :edit, :update, :destroy, :add_video_to, :remove_video_from]
 
 	# GET /galleries
@@ -37,10 +38,7 @@ class GalleriesController < ApplicationController
 
 	# GET /galleries/new
 	def new
-		@gallery = Gallery.new
-		12.times do
-			@gallery.gallery_videos.build
-		end
+		@gallery = Gallery.new user: @user
 	end
 
 	# GET /galleries/1/edit
@@ -52,10 +50,11 @@ class GalleriesController < ApplicationController
 	# POST /galleries.json
 	def create
 		@gallery = Gallery.new(gallery_params)
+		@gallery.user = @user
 
 		respond_to do |format|
 			if @gallery.save
-				format.html { redirect_to @gallery, notice: 'Gallery was successfully created.' }
+				format.html { redirect_to [@user, @gallery], notice: 'Gallery was successfully created.' }
 				format.json { render :show, status: :created, location: @gallery }
 			else
 				format.html { render :new }
@@ -69,7 +68,7 @@ class GalleriesController < ApplicationController
 	def update
 		respond_to do |format|
 			if @gallery.update(gallery_params)
-				format.html { redirect_to @gallery, notice: 'Gallery was successfully updated.' }
+				format.html { redirect_to [@user, @gallery], notice: 'Gallery was successfully updated.' }
 				format.json { render :show, status: :ok, location: @gallery }
 			else
 				format.html { render :edit }
@@ -83,13 +82,17 @@ class GalleriesController < ApplicationController
 	def destroy
 		@gallery.destroy
 		respond_to do |format|
-			format.html { redirect_to galleries_url, notice: 'Gallery was successfully destroyed.' }
+			format.html { redirect_to user_galleries_path(@user), notice: 'Gallery was successfully destroyed.' }
 			format.json { head :no_content }
 		end
 	end
 
 	private
 	# Use callbacks to share common setup or constraints between actions.
+	def set_user
+		@user = User.find(params[:user_id])
+	end
+
 	def set_gallery
 		@gallery = Gallery.find(params[:id])
 	end

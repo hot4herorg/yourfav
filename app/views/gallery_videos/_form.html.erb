@@ -1,0 +1,17 @@
+<%= form_for(@gallery_video) do |f| %>
+  <% if @gallery_video.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@gallery_video.errors.count, "error") %> prohibited this gallery_video from being saved:</h2>
+
+      <ul>
+      <% @gallery_video.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

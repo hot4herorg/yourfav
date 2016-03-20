@@ -1,6 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Galleries</h1>
+<%= link_to 'New Gallery', new_user_gallery_path(@user) %>
+
+<h1>User Galleries</h1>
 
 <table class="table table-striped">
 	<thead>
@@ -17,21 +19,17 @@
 		<% @galleries.each do |gallery| %>
 		<tr>
 			<td>
-				<%= link_to gallery, data: {toggle: :modal, target: '#gallery-modal'} do %>
+				<%= link_to [@user, gallery], data: {toggle: :modal, target: '#gallery-modal'} do %>
 				gallery
 				<% end %>
 			</td>
 			<td><%= gallery.name %></td>
-			<td><%= gallery.user %></td>
+			<td><%= gallery.user.email %></td>
 			<td><%= gallery.private %></td>
-			<td><%= link_to 'Show', gallery %></td>
-			<td><%= link_to 'Edit', edit_gallery_path(gallery) %></td>
-			<td><%= link_to 'Destroy', gallery, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+			<td><%= link_to 'Show', [@user, gallery] %></td>
+			<td><%= link_to 'Edit', edit_user_gallery_path(@user, gallery) %></td>
+			<td><%= link_to 'Destroy', [@user, gallery], method: :delete, data: { confirm: 'Are you sure?' } %></td>
 		</tr>
 		<% end %>
 	</tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Gallery', new_gallery_path %>

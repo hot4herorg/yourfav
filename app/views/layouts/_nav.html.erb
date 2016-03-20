@@ -16,7 +16,7 @@
 
 			<ul class="nav navbar-nav">
 
-				<li class="dropdown">
+				<!-- <li class="dropdown">
 					<a class="dropdown-toggle" href="#" data-toggle="dropdown">Add Video <strong class="caret"></strong></a>
 					<div class="dropdown-menu" style="padding: 15px; min-width: 300px;">
 						<form>
@@ -27,23 +27,30 @@
 							<button type="submit" class="btn btn-sm btn-block btn-info">Add Video</button>
 						</form>
 					</div>
-				</li>
+				</li> -->
 
 				<%= content_tag :li, link_to('Add Video', new_video_path) %>
-				<%= content_tag :li, link_to('Galleries', galleries_path) %>
-				<%#= content_tag :li, link_to('Gallery', Gallery.find(3), data: {toggle: :modal, target: '#gallery-modal'}), id: 'default-gallery-btn' %>
+				<%= content_tag :li, link_to('Galleries', user_galleries_path(current_user)) if user_signed_in? %>
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-						Admin
-						<span class="caret"></span>
+
+						<i class="fa fa- fa-user"></i> <span class="caret"></span>
+
 					</a>
 					<ul class="dropdown-menu">
+
 						<%= content_tag :li, link_to('Sites', sites_path) %>
+
 						<li role="separator" class="divider"></li>
-						<li><a href="#">Separated link</a></li>
+						<li>
+							<%= link_to_unless user_signed_in?, 'Sign in', new_user_session_path do %>
+							<%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
+							<% end %>
+						</li>
+
 					</ul>
 				</li>
 			</ul>

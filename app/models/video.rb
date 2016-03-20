@@ -9,7 +9,7 @@ class Video < ActiveRecord::Base
 	has_many :gallery_videos, dependent: :destroy
 	has_many :galleries, through: :gallery_videos
 
-	default_scope { order(created_at: :desc) }
+	default_scope { includes(:site).order(created_at: :desc) }
 
 	def embed_code
 		self.site.embed_code.gsub("{{key}}", self.key)

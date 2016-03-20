@@ -8,12 +8,12 @@
 	<% @gallery.videos.each do |video| %>
 	<div class="col-sm-6">
 		<%= render 'videos/embed', video: video %>
-		<%= link_to 'x Gallery', remove_video_from_gallery_path(@gallery, video), class: 'btn btn-sm btn-warning', remote: false, method: :delete if params[:controller] == 'galleries' %>
+		<%= link_to 'x Gallery', user_gallery_video_path(current_user, @gallery, video), class: 'btn btn-sm btn-warning', remote: false, method: :delete, confirm: 'Are you sure?' %>
 	</div>
 	<% end %>
 </div>
 
 <hr>
 
-<%= link_to 'Edit', edit_gallery_path(@gallery) %> |
-<%= link_to 'Back', galleries_path %>
+<%= link_to 'Edit', edit_user_gallery_path(@user, @gallery) %> |
+<%= link_to 'Back', user_galleries_path(@user) %>

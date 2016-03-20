@@ -1,0 +1,2 @@
+module GalleryVideosHelper
+end

@@ -5,16 +5,32 @@
 	<% end %>
 	<div class="panel-body">
 		<h4>
-		<%= video.title %>
-		<br>
+			<%= video.title %>
+		</h4>
+
+		<div class="btn-group pull-right">
+
+			<%#= favorite_btn video %>
+
+			<button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Add to: <span class="caret"></span>
+			</button>
+
+			<ul class="dropdown-menu">
+				<% current_user.galleries.each do |gallery| %>
+				<%= content_tag :li, link_to(gallery.name, user_gallery_videos_path(current_user, gallery, id: video), method: :post) %>
+				<% end if user_signed_in? %>
+
+				<%= content_tag :li, nil, role: :separator, class: :divider if false %>
+
+				<%= content_tag :li, link_to('Sign in', new_user_session_path) unless user_signed_in? %>
+			</ul>
+		</div>
+
 		<small>
 			<%= link_to video.site.name, video.site %>
 		</small>
-	</h4>
-		<p class="text-right">
-			<%= favorite_btn video %>
-			<%#= link_to '+ Gallery', add_video_to_gallery_path(3, video), class: 'btn btn-sm btn-primary', remote: true, method: :put unless params[:controller] == 'galleries' %>
-		</p>
+
 	</div>
 </div>
 <% end %>
