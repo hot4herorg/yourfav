@@ -5,11 +5,6 @@ GIT
     markable (0.1.4)
       rails (>= 3.1)
 
-PATH
-  remote: lib/phnetwork_scraper
-  specs:
-    phnetwork_scraper (0.1.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -188,7 +183,6 @@ DEPENDENCIES
   markable!
   nokogiri
   pg
-  phnetwork_scraper!
   rails (= 4.2.5)
   rails_12factor
   require_reloader

@@ -59,4 +59,4 @@ gem 'kaminari-bootstrap'
 
 # local
 gem 'require_reloader'
-gem 'phnetwork_scraper', path: 'lib/phnetwork_scraper'
+# gem 'phnetwork_scraper', path: 'lib/phnetwork_scraper'
