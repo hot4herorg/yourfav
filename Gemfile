@@ -57,6 +57,4 @@ gem 'markable', git: 'https://github.com/effektz/markable'
 gem 'kaminari'
 gem 'kaminari-bootstrap'
 
-# local
-gem 'require_reloader'
-# gem 'phnetwork_scraper', path: 'lib/phnetwork_scraper'
+gem 'yaml_db'

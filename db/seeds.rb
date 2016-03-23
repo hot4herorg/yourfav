@@ -6,13 +6,17 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+SITES = JSON.parse File.read("#{Rails.root}/lib/assets/sites.json"), object_class: OpenStruct
 
-# name domain embed_code ph_network:boolean enabled:boolean
-sites_array = []
-# sites_array << {name: '', domain: '', embed_code: '', ph_network: false}
-sites_array << {name: 'PornHub', domain: 'pornhub.com', embed_code: 'http://www.pornhub.com/embed/{{key}}', ph_network: true}
-sites_array << {name: 'YouPorn', domain: 'youporn.com', embed_code: 'http://www.pornhub.com/embed/{{key}}', ph_network: true}
-sites = Site.create sites_array
+SITES.each do |site|
+	Site.find_or_create_by(domain: site.domain) do |new_site|
+		new_site.name = site.name
+		# new_site.domain = site.domain
+		new_site.embed_code = site.embed_code
+		new_site.ph_network = site.ph_network
+		new_site.enabled = site.enabled
+	end
+end
 
 # url key title site:belongs_to
 # http://www.pornhub.com/view_video.php?viewkey=ph56902fde4706c
