@@ -1,4 +1,3 @@
-require 'phnetwork_scraper/version'
 require 'phnetwork_scraper/video'
 require 'phnetwork_scraper/thumbnails'
 

@@ -1,11 +1,5 @@
 Rails.application.routes.draw do
 
-	# namespace :api do
-	# 	resources :videos, param: :url
-	# 	resources :sites, :videos
-	# 	get '/vidoes/:url' => 'videos#new', as: :new_video
-	# end
-
 	root 'videos#index'
 
 	devise_for :users, path: :user

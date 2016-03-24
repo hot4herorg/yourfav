@@ -1,7 +1,7 @@
 module PhnetworkScraper
 	class Video
 
-		attr_accessor :url, :site_id, :key, :embed_code, :title, :thumb_url, :thumb_array
+		attr_accessor :url, :site, :site_id, :key, :embed_code, :title, :thumb_url, :thumb_array
 		# attr_reader :is_valid
 
 		def initialize(url)
@@ -13,7 +13,7 @@ module PhnetworkScraper
 				@embed_code = @site.embed_code.gsub("{{key}}", @key.to_s)
 				@title = get_title
 				@thumb_url = get_thumb_url.gsub('\/', '/')
-				@thumb_array = PhnetworkScraper::Thumbnails.of @site, @thumb_url if @thumb_url.present?
+				@thumb_array = PhnetworkScraper::Thumbnails.of self
 			end
 		end
 

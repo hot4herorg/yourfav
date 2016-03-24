@@ -32,7 +32,7 @@ class Video < ActiveRecord::Base
 
 	def gen_thumbs
 		if self.thumb_url.present?
-			PhnetworkScraper::Thumbnails.of(self.site, self.thumb_url).each do |url|
+			PhnetworkScraper::Thumbnails.of(self).each do |url|
 				self.thumbnails.find_or_create_by(url: url)
 			end
 		end

@@ -5,9 +5,9 @@ module PhnetworkScraper
 
 		class << self
 
-			def of(site, url)
-				@site = site
-				@url = url
+			def of(video)
+				@site = video.site
+				@url = video.thumb_url
 				return get_thumb_urls
 			end
 
