@@ -37,6 +37,9 @@ $ ->
 
 	# cycle thumbs on hover
 	$('body').on {
+		click: ->
+			clearInterval $(this).data('timer')
+			return
 		mouseenter: ->
 			clearInterval $(this).data('timer')
 			$img = $(this).find('.video-thumb')

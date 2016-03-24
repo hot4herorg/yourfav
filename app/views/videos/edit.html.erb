@@ -22,7 +22,18 @@
 	</div>
 
 	<div class="col-sm-6">
-		<%= image_tag @video.thumbnail, id: 'video_thumb', class: 'img-responsive center-block' %>
+		<div class="row">
+			<% @video.thumbnails.each do |thumbnail| %>
+			<div class="col-xs-3">
+				<p class="text-center">
+					<div class="embed-responsive embed-responsive-4by3">
+						<%= image_tag thumbnail.url, class: 'img-responsive center-block' %>
+					</div>
+					<%= link_to 'Delete', thumbnail, method: :delete, data: { confirm: 'Are you sure?' } %>
+				</p>
+			</div>
+			<% end %>
+		</div>
 	</div>
 
 </div>

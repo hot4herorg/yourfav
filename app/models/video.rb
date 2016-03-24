@@ -9,18 +9,19 @@ class Video < ActiveRecord::Base
 	has_many :gallery_videos, dependent: :destroy
 	has_many :galleries, through: :gallery_videos
 
-	default_scope { includes(:site).order(created_at: :desc) }
+	has_many :thumbnails, dependent: :destroy
+	after_create :gen_thumbs
+
+	default_scope { includes(:site, :thumbnails).order(created_at: :desc) }
 
 	def embed_code
 		self.site.embed_code.gsub("{{key}}", self.key)
 	end
 
-	def thumbnail
-		self.thumb_url if self.thumb_url.present?
-	end
-
-	def thumbnails_data
-		PhnetworkScraper::Thumbnails.of self.site, self.thumb_url if self.thumb_url.present?
+	def thumb
+		if thumb_url.present? && thumbnails.any?
+			thumbnails.map{ |t| File.basename(t.url) }.include?(File.basename(thumb_url)) ? thumb_url : thumbnails.first.url
+		end
 	end
 
 	def enabled?
@@ -28,6 +29,14 @@ class Video < ActiveRecord::Base
 	end
 
 	private
+
+	def gen_thumbs
+		if self.thumb_url.present?
+			PhnetworkScraper::Thumbnails.of(self.site, self.thumb_url).each do |url|
+				self.thumbnails.find_or_create_by(url: url)
+			end
+		end
+	end
 
 	# def embed_code_old
 	# 	case self.site.domain

@@ -1,7 +1,7 @@
 <%= link_to video, data: {toggle: :modal, target: '#defaultModal'}, class: 'list-group-item' do %>
 <div class="media">
 	<div class="media-left">
-		<%= image_tag video.thumbnail, class: 'video-list-thumb', width: 150, data: { original: video.thumbnail, slides: video.thumbnails_data } if video.thumbnail.present? %>
+		<%= image_tag video.thumbnail, class: 'video-list-thumb', width: 150, data: { original: video.thumbnail, slides: video.thumbnails.map(&:url) } if video.thumbnails.any? %>
 	</div>
 	<div class="media-body">
 		<h4 class="media-heading"><%= video.title %></h4>

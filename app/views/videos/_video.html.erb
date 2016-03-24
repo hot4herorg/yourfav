@@ -1,16 +1,4 @@
-<%= content_for :pre_container do %>
-<div class="" style="margin-top: -21px;">
-	<%= render 'videos/embed', video: video %>
-</div>
-<% end if is_videos_show_action? %>
-
 <p id="notice"><%= notice %></p>
-
-<div class="row" id="thumbnails">
-	<%#= render video.thumbnails if video.thumbnails.any? %>
-</div>
-
-<%= content_tag :h1, video.title if is_videos_show_action? %>
 
 <p>
 	<strong>Site:</strong>

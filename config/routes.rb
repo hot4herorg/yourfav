@@ -19,9 +19,12 @@ Rails.application.routes.draw do
 
 	get '/video_details' => 'videos#get_video_details', as: 'video_details'
 	resources :videos do
+		# resources :thumbnails
 		# post '/favorite' => 'favorites#create'
 		# delete '/favorite' => 'favorites#destroy', as: :favorite_delete
 	end
+
+	resources :thumbnails
 
 	get '/test', to: 'videos#test'
 

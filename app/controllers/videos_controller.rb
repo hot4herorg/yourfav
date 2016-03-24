@@ -11,7 +11,7 @@ class VideosController < ApplicationController
 	# GET /videos/1
 	# GET /videos/1.json
 	def show
-		render :show, layout: false if request.xhr?
+		# render :show, layout: false if request.xhr?
 	end
 
 	# GET /videos/:id/details
