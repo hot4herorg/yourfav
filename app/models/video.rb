@@ -2,15 +2,18 @@ class Video < ActiveRecord::Base
 
 	markable_as :favorite
 
-	validates :key, uniqueness: { scope: :site_id }
-
 	belongs_to :site
+	validates :key, uniqueness: { scope: :site_id }
 
 	has_many :gallery_videos, dependent: :destroy
 	has_many :galleries, through: :gallery_videos
 
 	has_many :thumbnails, dependent: :destroy
 	after_create :gen_thumbs
+
+	has_many :video_stars, dependent: :destroy
+	has_many :stars, -> { uniq }, through: :video_stars
+	# accepts_nested_attributes_for :video_stars, allow_destroy: true, reject_if: :all_blank
 
 	default_scope { includes(:site, :thumbnails).order(created_at: :desc) }
 
@@ -37,28 +40,5 @@ class Video < ActiveRecord::Base
 			end
 		end
 	end
-
-	# def embed_code_old
-	# 	case self.site.domain
-	# 	when 'pornhub.com', 'youporn.com', 'keezmovies.com', 'tube8.com', 'extremetube.com'
-	# 		"http://#{site.domain}/embed/#{key}"
-	# 	when 'youjizz.com', 'jizzhut.com'
-	# 		"http://#{site.domain}/videos/embed/#{key}"
-	# 	when 'xvideos.com'
-	# 		"http://flashservice.#{site.domain}/embedframe/#{key}"
-	# 	when 'redtube.com'
-	# 		"http://embed.#{site.domain}/?id=#{key}"
-	# 	when 'spankbang.com'
-	# 		"http://#{site.domain}/#{key}/embed/"
-	# 	when 'xtube.com'
-	# 		"http://www.xtube.com/watch.php?v={{key}}"
-	# 	when 'xhamster.com'
-	# 		"http://#{site.domain}/xembed.php?video=#{key}"
-	# 	when 'spankwire.com'
-	# 		"http://www.#{site.domain}/EmbedPlayer.aspx?ArticleId=#{key}"
-	# 	else
-	# 		'/video-not-found'
-	# 	end
-	# end
 
 end

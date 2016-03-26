@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :stars
 	root 'videos#index'
 
 	devise_for :users, path: :user
