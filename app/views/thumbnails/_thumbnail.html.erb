@@ -1,7 +1,8 @@
 <div class="col-xs-3">
-	<p>
+	<p class="text-center">
 		<div class="embed-responsive embed-responsive-4by3">
 			<%= image_tag thumbnail.url, class: 'img-responsive center-block' %>
 		</div>
+		<%= link_to 'Delete', thumbnail, method: :delete, data: { confirm: 'Are you sure?' } %>
 	</p>
 </div>

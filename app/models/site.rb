@@ -5,4 +5,6 @@ class Site < ActiveRecord::Base
 
 	has_many :videos
 
+	scope :enabled, -> { where enabled: true }
+
 end

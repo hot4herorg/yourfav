@@ -32,8 +32,8 @@ module PhnetworkScraper
 
 			@url = URI.decode(page.text).match(/#{match_var}(.*?)((?:https?|\/\/)(.*?)(?:png|jpe?g|gif))/)[2].gsub('\/', '/')
 
-		# rescue
-		# 	nil
+		rescue
+			nil
 		end
 
 	end

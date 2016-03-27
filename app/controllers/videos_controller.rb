@@ -39,7 +39,7 @@ class VideosController < ApplicationController
 		# urls << 'http://www.spankwire.com/TUSHY-Personal-Assistant-Janice-Griffith-Loves-Anal/video2582271/'
 		urls << 'http://www.tube8.com/teen/moms-teach-sex/28339511/'
 		# urls << 'http://www.xvideos.com/video2541006/jessica_jaymes_-_milf_memoirs'
-		# urls << 'https://www.playvids.com/v/NgHwmAFNuFi'
+		urls << 'https://www.playvids.com/v/NgHwmAFNuFi'
 
 		urls.each do |url|
 			tests << PhnetworkScraper::Video.new(url)
@@ -48,11 +48,11 @@ class VideosController < ApplicationController
 		# @video = PhnetworkScraper::Video.new urls[1]
 		# render text: @video.to_json
 
-		page = Nokogiri::HTML open('http://www.tube8.com/embed/teen/moms-teach-sex/28339511/')
-		url = page.css('#flvplayer video').first.attribute('poster').text
-		render text: url
+		# page = Nokogiri::HTML open('http://www.tube8.com/embed/teen/moms-teach-sex/28339511/')
+		# url = page.css('#flvplayer video').first.attribute('poster').text
+		# render text: url
 
-		# render text: tests.map(&:to_json)
+		render text: tests.map(&:to_json)
 	end
 
 	# GET /videos/new
