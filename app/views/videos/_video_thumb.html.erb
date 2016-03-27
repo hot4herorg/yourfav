@@ -1,7 +1,7 @@
 <%= content_tag_for :div, video, class: 'col-xs-6 col-sm-4 col-md-3' do %>
 <div class="panel panel-default">
 	<%= link_to video, data: {toggle: :modal, target: '#defaultModal'} do %>
-	<%= image_tag video.thumb, class: 'video-thumb img-responsive center-block', data: { original: video.thumb, slides: video.thumbnails.map(&:url) } if video.thumbnails.any? %>
+	<%= image_tag video.thumb, class: 'video-thumb img-responsive center-block', data: { original: video.thumb, slides: (video.thumbnails.map(&:url) if video.thumbnails.any?) } %>
 	<% end %>
 	<div class="panel-body">
 		<h4>
