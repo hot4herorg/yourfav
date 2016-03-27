@@ -21,14 +21,14 @@ class Video < ActiveRecord::Base
 	def thumb
 		if thumb_url.present? && thumbnails.any?
 			thumbnails.map{ |t| File.basename(t.url) }.include?(File.basename(thumb_url)) ? thumb_url : thumbnails.first.url
+		elsif thumb_url.present?
+			thumb_url
 		end
 	end
 
 	def enabled?
 		self.site.enabled
 	end
-
-	private
 
 	def gen_thumbs
 		if self.thumb_url.present?
@@ -37,6 +37,8 @@ class Video < ActiveRecord::Base
 			end
 		end
 	end
+	
+	private
 
 	# def embed_code_old
 	# 	case self.site.domain

@@ -1,6 +1,43 @@
-require 'json'
-
 module PhnetworkScraper
+
+	class Thumbnail
+
+		attr_accessor :url
+
+		def initialize(video)
+
+			page = Nokogiri::HTML open(video.embed_code)
+			case video.site.domain
+			when 'pornhub.com', 'keezmovies.com', 'extremetube.com', 'xtube.com'
+				match_var = 'image_url'
+			when 'youporn.com', 'redtube.com'
+				match_var = 'poster'
+			when 'spankbang.com'
+				match_var = 'cover_image'
+			when 'xhamster.com'
+				match_var = 'thumb'
+			when 'spankwire.com'
+				match_var = 'posterUrl'
+			when 'tube8.com'
+				return @url = page.css('#flvplayer video').first.attribute('poster').text
+			when 'xvideos.com'
+				page = Nokogiri::HTML open(video.url)
+				return @url = page.css('#player > embed').to_s.match(/thumb=(.*?)*(.*?)&/)[2].gsub('\/', '/')
+			when 'playvids.com'
+				match_var = 'big_thumb'
+				return @url = page.css('#video > embed').attribute('flashvars').text.match(/#{match_var}(.*?)((?:https?|\/\/)(.*?)(?:png|jpe?g|gif))/)[2].gsub('\/', '/')
+			else
+				return nil
+			end
+
+			@url = URI.decode(page.text).match(/#{match_var}(.*?)((?:https?|\/\/)(.*?)(?:png|jpe?g|gif))/)[2].gsub('\/', '/')
+
+		# rescue
+		# 	nil
+		end
+
+	end
+
 	module Thumbnails
 
 		class << self

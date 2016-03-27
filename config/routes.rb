@@ -13,6 +13,9 @@ Rails.application.routes.draw do
 
 	get '/video_details' => 'videos#get_video_details', as: 'video_details'
 	resources :videos do
+		member do
+			get '/generate-thumbs' => 'videos#gen_thumbs'
+		end
 		# resources :thumbnails
 		# post '/favorite' => 'favorites#create'
 		# delete '/favorite' => 'favorites#destroy', as: :favorite_delete
