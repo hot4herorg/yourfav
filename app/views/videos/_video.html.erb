@@ -9,3 +9,12 @@
 	<strong>Url:</strong>
 	<%= link_to 'Original Link', video.url, target: '_blank' %>
 </p>
+
+<p>
+	<strong>Stars:</strong>
+	<%= link_to raw('<i class="fa fa-fw fa-plus"></i>'), new_video_star_path(video) %>
+	<br>
+	<% video.stars.each do |star| %>
+	<%= link_to star.name, star %>
+	<% end if video.stars.any? %>
+</p>

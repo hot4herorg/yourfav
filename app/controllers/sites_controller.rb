@@ -13,7 +13,9 @@ class SitesController < ApplicationController
 	# GET /sites/1
 	# GET /sites/1.json
 	def show
+		@page_title = @site.name
 		@videos = @site.videos.page(params[:page])
+		render template: 'videos/index'
 	end
 
 	# GET /sites/new

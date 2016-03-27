@@ -1,0 +1,23 @@
+<%= form_for @video_star, html: {class: 'form-inline'} do |f| %>
+<% if @video_star.errors.any? %>
+<div id="error_explanation">
+	<h2><%= pluralize(@video_star.errors.count, "error") %> prohibited this video_star from being saved:</h2>
+
+	<ul>
+		<% @video_star.errors.full_messages.each do |message| %>
+		<li><%= message %></li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+
+<%= f.hidden_field :video_id %>
+
+<div class="form-group form-group-sm">
+	<%= f.label :star_name %>
+	<%= f.text_field :star_name, class: 'form-control' %>
+</div>
+
+<%= f.submit nil, class: 'btn btn-primary btn-sm' %>
+
+<% end %>

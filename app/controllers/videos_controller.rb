@@ -48,10 +48,12 @@ class VideosController < ApplicationController
 	def new
 		# @video = params[:url].present? ? Video.new( PhnetworkScraper::Video.new(params[:url]) ) : Video.new
 		@video = Video.new
+		@video.video_stars.build
 	end
 
 	# GET /videos/1/edit
 	def edit
+		@video.video_stars.build
 	end
 
 	# POST /videos
@@ -102,6 +104,6 @@ class VideosController < ApplicationController
 
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def video_params
-		params.require(:video).permit(:url, :key, :title, :site_id, :thumb_url)
+		params.require(:video).permit(:url, :key, :title, :site_id, :thumb_url, video_stars_attributes: [:star_id, :_destroy])
 	end
 end

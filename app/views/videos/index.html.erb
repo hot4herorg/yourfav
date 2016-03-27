@@ -2,7 +2,7 @@
 
 <%= link_to 'Add Video', new_video_path, class: 'pull-right' %>
 
-<h1>All Videos</h1>
+<%= content_tag :h2, (@page_title ||= 'Videos') %>
 
 <div class="row" id="videos">
 	<%= render partial: 'videos/video_thumb', collection: @videos, as: :video %>

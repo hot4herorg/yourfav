@@ -13,7 +13,7 @@ class Video < ActiveRecord::Base
 
 	has_many :video_stars, dependent: :destroy
 	has_many :stars, -> { uniq }, through: :video_stars
-	# accepts_nested_attributes_for :video_stars, allow_destroy: true, reject_if: :all_blank
+	accepts_nested_attributes_for :video_stars, allow_destroy: true, reject_if: :all_blank
 
 	default_scope { includes(:site, :thumbnails).order(created_at: :desc) }
 

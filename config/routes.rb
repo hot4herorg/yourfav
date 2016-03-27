@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :stars
 	root 'videos#index'
 
 	devise_for :users, path: :user
@@ -14,6 +13,7 @@ Rails.application.routes.draw do
 
 	get '/video_details' => 'videos#get_video_details', as: 'video_details'
 	resources :videos do
+		resources :stars, controller: :video_stars
 		# resources :thumbnails
 		# post '/favorite' => 'favorites#create'
 		# delete '/favorite' => 'favorites#destroy', as: :favorite_delete
@@ -26,5 +26,7 @@ Rails.application.routes.draw do
 	resources :sites do
 		# get 'video/:key' => 'videos#show'
 	end
+
+	resources :stars
 
 end

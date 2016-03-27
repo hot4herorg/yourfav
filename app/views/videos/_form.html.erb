@@ -32,6 +32,15 @@
 	<%= f.text_field :thumb_url, class: 'form-control' %>
 </div>
 
+<div class="form-group form-group-sm">
+	<label>Stars</label>
+	<%= f.fields_for :video_stars do |video_star| %>
+	<p>
+		<%= video_star.select :star_id, Star.all.collect{ |s| [s.name, s.id] }, {include_blank: true}, class: 'form-control' %>
+	</p>
+	<% end %>
+</div>
+
 <div class="actions">
 	<%= f.submit nil, class: 'btn btn-default' %>
 </div>

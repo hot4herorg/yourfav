@@ -52,6 +52,7 @@ gem 'rails_12factor', group: :production
 gem 'nokogiri'
 gem 'devise'
 gem 'markable', git: 'https://github.com/effektz/markable'
+# gem 'rails4-autocomplete'
 
 # pagination
 gem 'kaminari'

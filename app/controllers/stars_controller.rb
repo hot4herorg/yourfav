@@ -1,74 +1,82 @@
 class StarsController < ApplicationController
-  before_action :set_star, only: [:show, :edit, :update, :destroy]
 
-  # GET /stars
-  # GET /stars.json
-  def index
-    @stars = Star.all
-  end
+	include StarsHelper
 
-  # GET /stars/1
-  # GET /stars/1.json
-  def show
-  end
+	before_action :set_star, only: [:show, :edit, :update, :destroy]
 
-  # GET /stars/new
-  def new
-    @star = Star.new
-  end
+	# autocomplete :name
 
-  # GET /stars/1/edit
-  def edit
-  end
+	# GET /stars
+	# GET /stars.json
+	def index
+		@stars = Star.all
+	end
 
-  # POST /stars
-  # POST /stars.json
-  def create
-    @star = Star.new(star_params)
+	# GET /stars/1
+	# GET /stars/1.json
+	def show
+		@page_title = @star.name
+		@videos = @star.videos.page(params[:page])
+		render template: 'videos/index'
+	end
 
-    respond_to do |format|
-      if @star.save
-        format.html { redirect_to @star, notice: 'Star was successfully created.' }
-        format.json { render :show, status: :created, location: @star }
-      else
-        format.html { render :new }
-        format.json { render json: @star.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+	# GET /stars/new
+	def new
+		@star = Star.new
+	end
 
-  # PATCH/PUT /stars/1
-  # PATCH/PUT /stars/1.json
-  def update
-    respond_to do |format|
-      if @star.update(star_params)
-        format.html { redirect_to @star, notice: 'Star was successfully updated.' }
-        format.json { render :show, status: :ok, location: @star }
-      else
-        format.html { render :edit }
-        format.json { render json: @star.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+	# GET /stars/1/edit
+	def edit
+	end
 
-  # DELETE /stars/1
-  # DELETE /stars/1.json
-  def destroy
-    @star.destroy
-    respond_to do |format|
-      format.html { redirect_to stars_url, notice: 'Star was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
+	# POST /stars
+	# POST /stars.json
+	def create
+		@star = Star.new(star_params)
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_star
-      @star = Star.find(params[:id])
-    end
+		respond_to do |format|
+			if @star.save
+				format.html { redirect_to @star, notice: 'Star was successfully created.' }
+				format.json { render :show, status: :created, location: @star }
+			else
+				format.html { render :new }
+				format.json { render json: @star.errors, status: :unprocessable_entity }
+			end
+		end
+	end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def star_params
-      params.require(:star).permit(:name)
-    end
+	# PATCH/PUT /stars/1
+	# PATCH/PUT /stars/1.json
+	def update
+		respond_to do |format|
+			if @star.update(star_params)
+				format.html { redirect_to @star, notice: 'Star was successfully updated.' }
+				format.json { render :show, status: :ok, location: @star }
+			else
+				format.html { render :edit }
+				format.json { render json: @star.errors, status: :unprocessable_entity }
+			end
+		end
+	end
+
+	# DELETE /stars/1
+	# DELETE /stars/1.json
+	def destroy
+		@star.destroy
+		respond_to do |format|
+			format.html { redirect_to stars_url, notice: 'Star was successfully destroyed.' }
+			format.json { head :no_content }
+		end
+	end
+
+	private
+	# Use callbacks to share common setup or constraints between actions.
+	def set_star
+		@star = Star.find(params[:id])
+	end
+
+	# Never trust parameters from the scary internet, only allow the white list through.
+	def star_params
+		params.require(:star).permit(:name)
+	end
 end
