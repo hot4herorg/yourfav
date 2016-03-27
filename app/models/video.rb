@@ -1,6 +1,6 @@
 class Video < ActiveRecord::Base
 
-	markable_as :favorite
+	acts_as_votable
 
 	belongs_to :site
 	validates :key, uniqueness: { scope: :site_id }
@@ -40,7 +40,7 @@ class Video < ActiveRecord::Base
 			end
 		end
 	end
-	
+
 	private
 
 end

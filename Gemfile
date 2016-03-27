@@ -51,7 +51,7 @@ gem 'rails_12factor', group: :production
 
 gem 'nokogiri'
 gem 'devise'
-gem 'markable', git: 'https://github.com/effektz/markable'
+gem 'acts_as_votable'
 # gem 'rails4-autocomplete'
 
 # pagination

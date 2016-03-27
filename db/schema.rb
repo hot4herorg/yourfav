@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160326203147) do
+ActiveRecord::Schema.define(version: 20160327224123) do
 
   create_table "galleries", force: :cascade do |t|
     t.string   "name"
@@ -32,18 +32,6 @@ ActiveRecord::Schema.define(version: 20160326203147) do
 
   add_index "gallery_videos", ["gallery_id"], name: "index_gallery_videos_on_gallery_id"
   add_index "gallery_videos", ["video_id"], name: "index_gallery_videos_on_video_id"
-
-  create_table "marks", force: :cascade do |t|
-    t.integer  "marker_id"
-    t.string   "marker_type"
-    t.integer  "markable_id"
-    t.string   "markable_type"
-    t.string   "mark",          limit: 128
-    t.datetime "created_at"
-  end
-
-  add_index "marks", ["markable_id", "markable_type", "mark"], name: "index_marks_on_markable_id_and_markable_type_and_mark"
-  add_index "marks", ["marker_id", "marker_type", "mark"], name: "index_marks_on_marker_id_and_marker_type_and_mark"
 
   create_table "sites", force: :cascade do |t|
     t.string   "name"
@@ -104,11 +92,40 @@ ActiveRecord::Schema.define(version: 20160326203147) do
     t.string   "key"
     t.string   "title"
     t.integer  "site_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.string   "thumb_url"
+    t.integer  "cached_votes_total",      default: 0
+    t.integer  "cached_votes_score",      default: 0
+    t.integer  "cached_votes_up",         default: 0
+    t.integer  "cached_votes_down",       default: 0
+    t.integer  "cached_weighted_score",   default: 0
+    t.integer  "cached_weighted_total",   default: 0
+    t.float    "cached_weighted_average", default: 0.0
   end
 
+  add_index "videos", ["cached_votes_down"], name: "index_videos_on_cached_votes_down"
+  add_index "videos", ["cached_votes_score"], name: "index_videos_on_cached_votes_score"
+  add_index "videos", ["cached_votes_total"], name: "index_videos_on_cached_votes_total"
+  add_index "videos", ["cached_votes_up"], name: "index_videos_on_cached_votes_up"
+  add_index "videos", ["cached_weighted_average"], name: "index_videos_on_cached_weighted_average"
+  add_index "videos", ["cached_weighted_score"], name: "index_videos_on_cached_weighted_score"
+  add_index "videos", ["cached_weighted_total"], name: "index_videos_on_cached_weighted_total"
   add_index "videos", ["site_id"], name: "index_videos_on_site_id"
+
+  create_table "votes", force: :cascade do |t|
+    t.integer  "votable_id"
+    t.string   "votable_type"
+    t.integer  "voter_id"
+    t.string   "voter_type"
+    t.boolean  "vote_flag"
+    t.string   "vote_scope"
+    t.integer  "vote_weight"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope"
+  add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
 
 end
