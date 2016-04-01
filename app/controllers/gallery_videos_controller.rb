@@ -1,15 +1,17 @@
 class GalleryVideosController < ApplicationController
 
-	before_action :set_user, except: []
-	before_action :set_gallery, except: []
+	before_action :set_user, except: [:new]
+	before_action :set_gallery, except: [:index, :new]
 	before_action :set_gallery_video, only: [:show, :edit, :update, :destroy]
-	before_action :set_video, except: []
+	before_action :set_video, except: [:new]
+
+	layout false, only: [:new]
 
 	# GET /gallery_videos
 	# GET /gallery_videos.json
-	# def index
-	# 	@gallery_videos = @gallery.videos
-	# end
+	def index
+		@gallery_videos = @gallery.videos
+	end
 
 	# GET /gallery_videos/1
 	# GET /gallery_videos/1.json
@@ -18,9 +20,10 @@ class GalleryVideosController < ApplicationController
 	end
 
 	# GET /gallery_videos/new
-	# def new
-	# 	@gallery_video = GalleryVideo.new gallery: @gallery, video: @video
-	# end
+	def new
+		# @gallery_video = GalleryVideo.new gallery: @gallery, video: @video
+		@video = Video.find(params[:video_id])
+	end
 
 	# GET /gallery_videos/1/edit
 	def edit

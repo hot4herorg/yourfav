@@ -17,3 +17,7 @@
 //= require masonry.min
 //= require imagesLoaded.min
 //= require_tree .
+
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})

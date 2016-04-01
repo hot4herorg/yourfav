@@ -12,4 +12,12 @@ module FavoritesHelper
 		end
 	end
 
+	def favorite_li(video)
+		if current_user.liked? video
+			content_tag :li, link_to(content_tag(:i, nil, class: 'fa fa-heart'), '#'), class: 'favorite-item text-center active'
+		else
+			content_tag :li, link_to(content_tag(:i, nil, class: 'fa fa-heart'), '#'), class: 'favorite-item text-center'
+		end
+	end
+
 end

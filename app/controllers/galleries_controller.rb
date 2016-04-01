@@ -1,12 +1,13 @@
 class GalleriesController < ApplicationController
 
+	before_action :authenticate_user!, except: [:show]
 	before_action :set_user, except: []
 	before_action :set_gallery, only: [:show, :edit, :update, :destroy, :add_video_to, :remove_video_from]
 
 	# GET /galleries
 	# GET /galleries.json
 	def index
-		@galleries = Gallery.all
+		@galleries = current_user.galleries
 	end
 
 	# GET /galleries/1

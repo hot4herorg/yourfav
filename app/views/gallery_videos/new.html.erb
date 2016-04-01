@@ -1,5 +1,20 @@
-<h1>New Gallery Video</h1>
+<% if user_signed_in? %>
 
-<%= render 'form' %>
+<%= favorite_li @video %>
 
-<%= link_to 'Back', gallery_videos_path %>
+<%= content_tag :li, nil, role: :separator, class: :divider %>
+
+<% current_user.galleries.each do |gallery| %>
+<li>
+	<%= link_to user_gallery_videos_path(current_user, gallery, id: @video), method: :post do %>
+	<%= truncate gallery.name, length: 15 %>
+	<%= content_tag :span, gallery.videos.count, class: 'badge pull-right' %>
+	<% end %>
+</li>
+<% end %>
+
+<% else %>
+
+<%= content_tag :li, link_to('Sign in', new_user_session_path), class: 'text-center' unless user_signed_in? %>
+
+<% end %>

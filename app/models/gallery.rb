@@ -7,4 +7,6 @@ class Gallery < ActiveRecord::Base
 	has_many :gallery_videos, dependent: :destroy
 	has_many :videos, -> { uniq }, through: :gallery_videos
 
+	default_scope { order(created_at: :desc) }
+
 end

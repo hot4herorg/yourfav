@@ -1,11 +1,11 @@
 module VideosHelper
 
-	def is_videos_show_action?
-		params[:controller] == 'videos' && params[:action] == 'show' && !request.xhr?
-	end
-
-	def video_favorite_delete_path(*args)
-
+	def video_thumb_link_title(video)
+		if video.stars.any?
+			video.stars.map(&:name).join(', ')
+		else
+			video.title
+		end
 	end
 
 end

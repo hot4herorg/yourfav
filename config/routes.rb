@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 			get '/generate-thumbs' => 'videos#gen_thumbs'
 		end
 		resources :stars, controller: :video_stars
+		resources :gallery_videos, as: :gallery, path: :gallery, only: [:new]
 		# resources :thumbnails
 		# post '/favorite' => 'favorites#create'
 		# delete '/favorite' => 'favorites#destroy', as: :favorite_delete

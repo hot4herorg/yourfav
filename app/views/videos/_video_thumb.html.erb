@@ -1,29 +1,24 @@
 <%= content_tag_for :div, video, class: 'col-xs-6 col-sm-4 col-md-3' do %>
 <div class="panel panel-default">
-	<%= link_to video, data: {toggle: :modal, target: '#defaultModal'} do %>
+
+	<%= link_to video, title: video_thumb_link_title(video), data: {toggle: :modal, target: '#defaultModal'} do %>
 	<%= image_tag video.thumb, class: 'video-thumb img-responsive center-block', data: { original: video.thumb, slides: (video.thumbnails.map(&:url) if video.thumbnails.any?) } %>
 	<% end %>
+
 	<div class="panel-body">
 		<h4>
 			<%= video.title %>
 		</h4>
 
-		<div class="btn-group pull-right">
-
-			<%#= favorite_btn video %>
-
+		<div class="btn-group video-actions pull-right" data-url="<%= new_video_gallery_path(video) %>">
 			<button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				Add to: <span class="caret"></span>
+				<!-- Add to: <span class="caret"></span> -->
+				<i class="fa fa-th-list"></i>
 			</button>
-
 			<ul class="dropdown-menu">
-				<% current_user.galleries.each do |gallery| %>
-				<%= content_tag :li, link_to(gallery.name, user_gallery_videos_path(current_user, gallery, id: video), method: :post) %>
-				<% end if user_signed_in? %>
-
-				<%= content_tag :li, nil, role: :separator, class: :divider if false %>
-
-				<%= content_tag :li, link_to('Sign in', new_user_session_path) unless user_signed_in? %>
+				<li class="text-center">
+					<i class="fa fa-spinner fa-spin"></i>
+				</li>
 			</ul>
 		</div>
 
