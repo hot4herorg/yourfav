@@ -9,7 +9,7 @@ class StarsController < ApplicationController
 	# GET /stars
 	# GET /stars.json
 	def index
-		@stars = Star.all
+		@stars = Star.has_videos
 	end
 
 	# GET /stars/1

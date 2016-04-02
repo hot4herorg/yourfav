@@ -19,6 +19,7 @@
 //= require transit.min
 //= require_tree .
 
+// cycle through thumbnails
 var thumbSlider = function(thumbClass, containerElem) {
 	$('body').on({
 		click: function() {
@@ -46,4 +47,14 @@ var thumbSlider = function(thumbClass, containerElem) {
 			$img.attr('src', orig_url);
 		}
 	}, containerElem);
+};
+
+// wiggle animations
+var wiggleElem = function(elem) {
+	$(elem)
+	.transition({rotate: '5deg'}, 100)
+	.transition({rotate: '-5deg'}, 100)
+	.transition({rotate: '5deg'}, 100)
+	.transition({rotate: '-5deg'}, 100)
+	.transition({rotate: '0deg'}, 100);
 };
