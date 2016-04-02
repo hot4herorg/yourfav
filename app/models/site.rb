@@ -5,6 +5,8 @@ class Site < ActiveRecord::Base
 
 	has_many :videos
 
+	default_scope { order(:name) }
+
 	scope :enabled, -> { where enabled: true }
 
 end

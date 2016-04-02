@@ -4,7 +4,7 @@ class Video < ActiveRecord::Base
 
 	attr_accessor :add_by_url
 
-	validates :key, :site, presence: true
+	validates :url, :key, :site, :thumb_url, presence: true
 
 	belongs_to :site
 	validates :key, uniqueness: { scope: :site_id }

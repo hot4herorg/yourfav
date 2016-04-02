@@ -24,7 +24,7 @@
 
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-						<i class="fa fa- fa-user"></i> <span class="caret"></span>
+						<i class="fa fa- fa-gear"></i> <span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
 
@@ -51,7 +51,7 @@
 							<%= form_for Video.new(add_by_url: true) do |f| %>
 							<div class="input-group">
 								<%= f.hidden_field :add_by_url %>
-								<%= f.text_field :url, class: 'form-control', placeholder: 'Video URL' %>
+								<%= f.text_field :url, class: 'form-control', placeholder: 'Video URL', id: 'nav_video_url' %>
 								<span class="input-group-btn">
 									<button class="btn btn-warning" type="submit">
 										<i class="fa fa-plus"></i>
