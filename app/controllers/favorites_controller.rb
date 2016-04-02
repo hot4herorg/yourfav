@@ -15,7 +15,7 @@ class FavoritesController < ApplicationController
 
 	def set_object
 		klass = request.path.split('/')[1].classify.constantize
-		@object = Video.find(params[:id])
+		@object = klass.find(params[:id])
 	end
 
 end

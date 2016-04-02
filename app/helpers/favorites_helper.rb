@@ -13,19 +13,6 @@ module FavoritesHelper
 		end
 	end
 
-	def favorite_video_btn(video, text=nil)
-		text ||= content_tag(:i, nil, class: 'fa fa-heart')
-		if user_signed_in?
-			if current_user.liked? video
-				link_to text, unfavorite_video_path(video), method: :delete, remote: :true, class: "btn btn-sm btn-danger btn-video-favorite-#{video.id}"
-			else
-				link_to text, favorite_video_path(video), method: :post, remote: :true, class: "btn btn-sm btn-default btn-video-favorite-#{video.id}"
-			end
-		else
-			link_to text, new_user_session_path, class: "btn btn-sm btn-default btn-video-favorite-#{video.id}"
-		end
-	end
-
 	def favorite_video_li(video, text=nil)
 		text ||= content_tag(:i, nil, class: 'fa fa-heart')
 		if current_user.liked? video
