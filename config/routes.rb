@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
 	root 'videos#index'
-	
+
 	get '/extension' => 'static_pages#browser_extension'
 
 	devise_for :users, path: :user

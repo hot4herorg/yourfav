@@ -6,7 +6,7 @@
 
 <% current_user.galleries.each do |gallery| %>
 <li>
-	<%= link_to user_gallery_videos_path(current_user, gallery, id: @video), method: :post do %>
+	<%= link_to user_gallery_videos_path(current_user, gallery, id: @video), method: :post, remote: true do %>
 	<%= truncate gallery.name, length: 15 %>
 	<%= content_tag :span, gallery.videos.count, class: 'badge pull-right' %>
 	<% end %>

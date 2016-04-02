@@ -1,15 +1,15 @@
-<p id="notice"><%= notice %></p>
-
-<%= link_to 'New Gallery', new_user_gallery_path(@user) %>
-
-<h1>User Galleries</h1>
+<header class="page-header">
+	<%= link_to 'New Gallery', new_user_gallery_path(@user), class: 'pull-right' %>
+	<h2>
+		Galleries
+	</h2>
+</header>
 
 <table class="table table-striped">
 	<thead>
 		<tr>
-			<th>modal</th>
-			<th>Name</th>
-			<th>User</th>
+			<th>Gallery</th>
+			<th class="text-center">Videos</th>
 			<th>Private</th>
 			<th colspan="3"></th>
 		</tr>
@@ -20,11 +20,10 @@
 		<tr>
 			<td>
 				<%= link_to [@user, gallery], data: {toggle: :modal, target: '#gallery-modal'} do %>
-				gallery
+				<i class="fa fa-fw fa-th-large"></i> <%= gallery.name %>
 				<% end %>
 			</td>
-			<td><%= gallery.name %></td>
-			<td><%= gallery.user.email %></td>
+			<td class="text-center"><%= content_tag :span, gallery.videos.count, class: 'badge' %></td>
 			<td><%= gallery.private %></td>
 			<td><%= link_to 'Show', [@user, gallery] %></td>
 			<td><%= link_to 'Edit', edit_user_gallery_path(@user, gallery) %></td>

@@ -38,6 +38,7 @@ class GalleryVideosController < ApplicationController
 			if @gallery_video.save
 				format.html { redirect_to [@user, @gallery], notice: 'Gallery video was successfully created.' }
 				format.json { render :show, status: :created, location: @gallery_video }
+				format.js { render :create }
 			else
 				format.html { render :new }
 				format.json { render json: @gallery_video.errors, status: :unprocessable_entity }

@@ -1,12 +1,15 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Sites</h1>
+<header class="page-header">
+	<%= link_to 'New Site', new_site_path, class: 'pull-right' %>
+	<h2>
+		Sites
+	</h2>
+</header>
 
 <table class="table table-striped">
 	<thead>
 		<tr>
 			<th>Name</th>
-			<th>Video Count</th>
+			<th class="text-center">Videos</th>
 			<th colspan="2"></th>
 		</tr>
 	</thead>
@@ -16,7 +19,7 @@
 
 		<%= content_tag :tr, class: ( site.enabled ? nil : 'danger' ) do %>
 		<td><%= link_to site.name, site %></td>
-		<td><%= site.videos.count %></td>
+		<td class="text-center"><%= content_tag :span, site.videos.count, class: 'badge' %></td>
 		<td><%= link_to 'Edit', edit_site_path(site) %></td>
 		<td><%= link_to 'Destroy', site, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 		<% end %>
@@ -24,7 +27,3 @@
 		<% end %>
 	</tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Site', new_site_path %>
