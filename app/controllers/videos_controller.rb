@@ -1,69 +1,31 @@
 class VideosController < ApplicationController
 
-	before_action :set_video, only: [:show, :edit, :update, :destroy, :gen_thumbs]
+	before_action :authenticate_user!, except: [:index, :show, :new, :create, :preview]
+	before_action :set_video, only: [:show, :edit, :update, :destroy, :generate_thumbs]
 
-	# GET /videos
-	# GET /videos.json
 	def index
 		@videos = Video.page(params[:page])
 		@page_title = 'All Videos'
 	end
 
-	# GET /videos/1
-	# GET /videos/1.json
 	def show
 		render :show, layout: false if request.xhr?
 	end
 
-	def get_video_details
+	def preview
 		@video = PhnetworkScraper::Video.new params[:url]
-		# render text: @video.to_json
 	end
 
-	def gen_thumbs
+	def generate_thumbs
 		@video.gen_thumbs
 		redirect_to [:edit, @video]
 	end
 
-	def test
-		tests = []
-		urls = []
-
-		# urls << 'http://www.pornhub.com/view_video.php?viewkey=1251583109'
-		# urls << 'http://www.keezmovies.com/video/blonde-teen-pornstar-ride-babe-doggy-small-tits-hd-1080p-7935781'
-		# urls << 'http://www.extremetube.com/video/fetishnetwork-renee-roulette-bondage-sex-on-couch-12658461'
-		# urls << 'http://www.youporn.com/watch/629938/brunette-masturbates-in-bedroom/'
-		# urls << 'http://spankbang.com/3uji/video/julia+roca+fucks+yoga+instructor'
-		# urls << 'http://www.redtube.com/338814'
-		# urls << 'http://xhamster.com/movies/4754837/nubilefilms_the_taste_of_passionate_fuck.html'
-		# urls << 'http://www.xtube.com/watch.php?v=Wdnhm-S689-'
-		# urls << 'http://www.spankwire.com/TUSHY-Personal-Assistant-Janice-Griffith-Loves-Anal/video2582271/'
-		urls << 'http://www.tube8.com/teen/moms-teach-sex/28339511/'
-		# urls << 'http://www.xvideos.com/video2541006/jessica_jaymes_-_milf_memoirs'
-		urls << 'https://www.playvids.com/v/NgHwmAFNuFi'
-
-		urls.each do |url|
-			tests << PhnetworkScraper::Video.new(url)
-		end
-
-		# @video = PhnetworkScraper::Video.new urls[1]
-		# render text: @video.to_json
-
-		# page = Nokogiri::HTML open('http://www.tube8.com/embed/teen/moms-teach-sex/28339511/')
-		# url = page.css('#flvplayer video').first.attribute('poster').text
-		# render text: url
-
-		render text: tests.map(&:to_json)
-	end
-
-	# GET /videos/new
 	def new
-		# @video = params[:url].present? ? Video.new( PhnetworkScraper::Video.new(params[:url]) ) : Video.new
 		@video = Video.new
 		@video.video_stars.build
 	end
 
-	# GET /videos/1/edit
 	def edit
 		@video.video_stars.build
 	end
@@ -72,7 +34,7 @@ class VideosController < ApplicationController
 	# POST /videos.json
 	def create
 		@video = Video.new(video_params)
-		@video = Video.new PhnetworkScraper::Video.new(@video.url).to_hash if @video.add_by_url
+		@video = Video.new PhnetworkScraper::Video.new(@video.url).to_params_hash if @video.add_by_url
 
 		respond_to do |format|
 			if @video.save

@@ -24,7 +24,7 @@ module PhnetworkScraper
 			false
 		end
 
-		def to_hash
+		def to_params_hash
 			keys = ['url', 'key', 'title', 'site_id', 'thumb_url']
 			hash = Hash.new
 			keys.each { |k| hash[k] = self.send(k.to_sym) }

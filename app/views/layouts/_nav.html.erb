@@ -18,6 +18,7 @@
 				<%= content_tag :li, link_to('Videos', videos_path, id: 'navbar-videos') %>
 				<%= content_tag :li, link_to('Favorites', user_path(current_user), id: 'navbar-favorites') if user_signed_in? %>
 				<%= content_tag :li, link_to('Galleries', user_galleries_path(current_user), id: 'navbar-galleries') if user_signed_in? %>
+				<%= link_to('Sign in', new_user_session_path, class: 'btn btn-sm btn-primary navbar-btn') unless user_signed_in? %>
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">

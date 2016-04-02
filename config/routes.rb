@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
 
-	root 'videos#index'
-
-	get '/extension' => 'static_pages#browser_extension'
-
 	devise_for :users, path: :user
+
+	authenticated :user do
+		root 'videos#index', as: :authenticated_root
+	end
+
+	root 'static_pages#home'
 
 	concern :favoritable do
 		member do
@@ -19,24 +21,22 @@ Rails.application.routes.draw do
 		end
 	end
 
-	get '/video_details' => 'videos#get_video_details', as: 'video_details'
 	resources :videos, concerns: [:favoritable] do
-		member do
-			get '/generate-thumbs' => 'videos#gen_thumbs'
-		end
+		get :preview, on: :collection
+		get :generate_thumbs, path: 'generate-thumbs', on: :member
 		resources :stars, controller: :video_stars
 		resources :gallery_videos, as: :gallery, path: :gallery, only: [:new]
 		# resources :thumbnails
 	end
 
-	resources :thumbnails
-
-	get '/test', to: 'videos#test'
-
-	resources :sites do
-		# get 'video/:key' => 'videos#show'
-	end
+	resources :sites
 
 	resources :stars, concerns: [:favoritable]
+
+	resources :thumbnails
+
+	get '/extension' => 'static_pages#browser_extension'
+	get '/donate' => 'static_pages#donate'
+	get '/test', to: 'static_pages#test'
 
 end

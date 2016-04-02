@@ -8,7 +8,7 @@
 	<div class="col-sm-6">
 
 		<div class="well">
-			<%= form_tag video_details_path, id: 'video_details', method: :get, remote: true do %>
+			<%= form_tag preview_videos_path, method: :get, remote: true do %>
 			<div class="input-group input-group-lg">
 				<%= text_field_tag :url, nil, class: 'form-control', placeholder: 'Video URL' %>
 				<span class="input-group-btn">
