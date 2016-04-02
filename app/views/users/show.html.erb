@@ -6,12 +6,16 @@
 
 <div class="row">
 	<div class="col-sm-8 col-md-9">
+		<ul class="nav nav-tabs">
+			<%= content_tag :li, link_to('Favorite Videos', user_path(@user)), class: (params[:feat_fav_stars].present? ? nil : 'active') %>
+			<%= content_tag :li, link_to('Videos Featuring Favorite Stars', user_path(@user, feat_fav_stars: true)), class: (params[:feat_fav_stars].present? ? 'active' : nil) %>
+		</ul>
 		<%= render template: 'videos/index', layout: false %>
 	</div>
 	<div class="col-sm-4 col-md-3">
 		<div class="panel panel-danger">
-			<header class="panel-heading">
-				<h4 class="panel-title text-center">Favorite Stars</h4>
+			<header class="panel-heading text-center">
+				Favorite Stars
 			</header>
 			<ul class="list-group">
 				<%= render(@stars) || content_tag(:li, 'This user has not Favorited any Stars.', class: 'list-group-item text-center') %>

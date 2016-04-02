@@ -12,8 +12,12 @@ class UsersController < ApplicationController
 	# GET /users/1
 	# GET /users/1.json
 	def show
-		@videos = @user.get_up_voted(Video).page(params[:page])
 		@stars = @user.get_up_voted(Star)
+		if params[:feat_fav_stars].present?
+			@videos = Video.joins(:stars).where('stars.id' => @stars.ids.uniq).page(params[:page])
+		else
+			@videos = @user.get_up_voted(Video).page(params[:page])
+		end
 	end
 
 	# GET /users/new
