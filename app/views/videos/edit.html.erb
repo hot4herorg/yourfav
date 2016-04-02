@@ -7,15 +7,16 @@
 <div class="row">
 	<div class="col-sm-6">
 
-		<p>
-			<%= form_tag video_details_path, id: 'video_details', class: 'form-inline', method: :get, remote: true do %>
-			<div class="form-group">
-				<label for="url">URL</label>
-				<%= text_field_tag :url, @video.url, class: 'form-control' %>
+		<div class="well">
+			<%= form_tag video_details_path, id: 'video_details', method: :get, remote: true do %>
+			<div class="input-group input-group-lg">
+				<%= text_field_tag :url, @video.url, class: 'form-control', placeholder: 'Video URL' %>
+				<span class="input-group-btn">
+					<%= submit_tag 'Search', class: 'btn btn-primary' %>
+				</span>
 			</div>
-			<%= submit_tag 'Search', class: 'btn btn-primary' %>
 			<% end %>
-		</p>
+		</div>
 
 		<div class="panel panel-default">
 			<div class="panel-body">

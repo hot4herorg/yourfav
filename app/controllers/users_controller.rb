@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 	def show
 		@stars = @user.get_up_voted(Star)
 		if params[:feat_fav_stars].present?
-			@videos = Video.joins(:stars).where('stars.id' => @stars.ids.uniq).page(params[:page])
+			@videos = Video.joins(:stars).where('stars.id' => @stars.ids.uniq).uniq.page(params[:page])
 		else
 			@videos = @user.get_up_voted(Video).page(params[:page])
 		end

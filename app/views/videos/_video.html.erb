@@ -12,7 +12,7 @@
 	<strong>Stars:</strong>
 	<%= link_to raw('<i class="fa fa-fw fa-plus"></i>'), new_video_star_path(video) %>
 	<br>
-	<% video.stars.each do |star| %>
-	<%= link_to star.name, star %>
-	<% end if video.stars.any? %>
+
+	<%= video.stars.map{ |s| link_to(s.name, s) }.join(', ').html_safe if video.stars.any? %>
+
 </p>

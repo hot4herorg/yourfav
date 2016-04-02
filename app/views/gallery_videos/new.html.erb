@@ -5,7 +5,7 @@
 <%= content_tag :li, nil, role: :separator, class: :divider %>
 
 <% current_user.galleries.each do |gallery| %>
-<li>
+<li class="add-gallery-video <%= gallery.videos.include?(@video) ? 'active disabled' : nil %>">
 	<%= link_to user_gallery_videos_path(current_user, gallery, id: @video), method: :post, remote: true do %>
 	<%= truncate gallery.name, length: 15 %>
 	<%= content_tag :span, gallery.videos.count, class: 'badge pull-right' %>

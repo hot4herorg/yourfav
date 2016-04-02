@@ -5,7 +5,7 @@ class Star < ActiveRecord::Base
 	has_many :video_stars, dependent: :destroy
 	has_many :videos, through: :video_stars
 
-	default_scope { includes(:videos).order(:name) }
+	default_scope { includes(:videos).where.not('videos.id' => nil).order(:name) }
 
 	def thumbnail
 		self.videos.first.thumb

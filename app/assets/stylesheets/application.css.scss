@@ -53,3 +53,13 @@ body {
 		background-color: $brand-danger;
 	}
 }
+
+.add-gallery-video.active.disabled {
+	a {
+		color: $gray;
+		background: $gray-lighter;
+		&:hover {
+			background: $gray-lighter;
+		}
+	}
+}

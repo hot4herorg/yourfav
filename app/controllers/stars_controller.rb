@@ -15,7 +15,7 @@ class StarsController < ApplicationController
 	# GET /stars/1
 	# GET /stars/1.json
 	def show
-		@videos = @star.videos.page(params[:page])
+		@videos = @star.videos.all.uniq.page(params[:page])
 	end
 
 	# GET /stars/new
