@@ -15,6 +15,7 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
 			<ul class="nav navbar-nav">
+				<%= content_tag :li, link_to('Videos', videos_path) %>
 				<%= content_tag :li, link_to('Favorites', user_path(current_user), id: 'navbar-favorites') if user_signed_in? %>
 				<%= content_tag :li, link_to('Galleries', user_galleries_path(current_user)) if user_signed_in? %>
 			</ul>
@@ -43,25 +44,28 @@
 			<ul class="nav navbar-nav navbar-right">
 
 				<li class="dropdown">
-					<a class="dropdown-toggle" href="#" data-toggle="dropdown">Add Video <strong class="caret"></strong></a>
+					<a class="dropdown-toggle" href="#" id="nav-add-video-text" data-toggle="dropdown">Add Video <strong class="caret"></strong></a>
 					<div id="nav-add-video-dropdown" class="dropdown-menu">
 
 						<p>
 							<%= form_for Video.new(add_by_url: true) do |f| %>
-								<div class="input-group">
-									<%= f.hidden_field :add_by_url %>
-									<%= f.text_field :url, class: 'form-control', placeholder: 'Video URL' %>
-									<span class="input-group-btn">
-										<button class="btn btn-warning" type="submit">
-											<i class="fa fa-plus"></i>
-										</button>
-									</span>
-								</div>
+							<div class="input-group">
+								<%= f.hidden_field :add_by_url %>
+								<%= f.text_field :url, class: 'form-control', placeholder: 'Video URL' %>
+								<span class="input-group-btn">
+									<button class="btn btn-warning" type="submit">
+										<i class="fa fa-plus"></i>
+									</button>
+								</span>
+							</div>
 							<% end %>
 						</p>
 
-						<p class="text-center">
-							<%= link_to 'Browser Extension', new_video_path %>
+						<p>
+							<ul class="list-inline text-center">
+								<%= content_tag :li, link_to('Browser Extension', extension_path, class: 'text-muted') %>
+								<%= content_tag :li, link_to('Add Video Manually', new_video_path, class: 'text-muted') %>
+							</ul>
 						</p>
 
 					</div>
