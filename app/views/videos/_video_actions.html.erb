@@ -1,0 +1,13 @@
+<% btn_size ||= 'md' %>
+<% dropup = (dropup ? :dropup : nil) %>
+
+<div class="btn-group video-actions pull-right <%= dropup %>" data-url="<%= new_video_gallery_path(video) %>">
+	<button type="button" class="btn btn-default btn-<%= btn_size %> dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		<i class="fa fa-th-list"></i>
+	</button>
+	<ul class="dropdown-menu">
+		<li class="text-center">
+			<i class="fa fa-spinner fa-spin"></i>
+		</li>
+	</ul>
+</div>

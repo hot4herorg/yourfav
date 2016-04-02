@@ -15,7 +15,7 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
 			<ul class="nav navbar-nav">
-				<%= content_tag :li, link_to('Favorites', user_path(current_user)) if user_signed_in? %>
+				<%= content_tag :li, link_to('Favorites', user_path(current_user), id: 'navbar-favorites') if user_signed_in? %>
 				<%= content_tag :li, link_to('Galleries', user_galleries_path(current_user)) if user_signed_in? %>
 			</ul>
 

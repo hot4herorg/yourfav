@@ -16,6 +16,7 @@
 //= require jquery.infinitescroll
 //= require masonry.min
 //= require imagesLoaded.min
+//= require transit.min
 //= require_tree .
 
 $(function () {

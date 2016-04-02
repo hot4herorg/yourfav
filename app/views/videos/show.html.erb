@@ -13,8 +13,9 @@
 				<%= content_tag :li, link_to('Edit', edit_video_path(@video)) if user_signed_in? %>
 				<%= content_tag :li, link_to('Destroy', @video, method: :delete, data: {confirm: 'Are you sure?'}) if user_signed_in? -%>
 			</ul>
-			<%= favorite_video_btn @video %>
-			<!-- <a href="#" class="btn btn-primary">Btn</a> -->
+
+			<%= render 'videos/video_actions', video: @video, dropup: true %>
+
 		</div>
 	</div>
 </div>
