@@ -19,6 +19,31 @@
 //= require transit.min
 //= require_tree .
 
-$(function () {
-  $('[data-toggle="popover"]').popover()
-})
+var thumbSlider = function(thumbClass, containerElem) {
+	$('body').on({
+		click: function() {
+			clearInterval($(this).data('timer'));
+		},
+		mouseenter: function() {
+			var $img, i, slides;
+			clearInterval($(this).data('timer'));
+			$img = $(this).find(thumbClass);
+			slides = $img.data('slides');
+			i = 0;
+			$(this).data('timer', setInterval((function() {
+				$img.attr('src', slides[i]);
+				i++;
+				if (i === slides.length) {
+					i = 0;
+				}
+			}), 500));
+		},
+		mouseleave: function() {
+			var $img, orig_url;
+			clearInterval($(this).data('timer'));
+			$img = $(this).find(thumbClass);
+			orig_url = $img.data('original');
+			$img.attr('src', orig_url);
+		}
+	}, containerElem);
+};

@@ -29,33 +29,5 @@ $ ->
 			return
 		return
 
-	# destroy remote modals after hidden
-	$('body').on 'hide.bs.modal', '.modal-refresh', ->
-		$(this).removeData 'bs.modal'
-		$(this).find('.modal-dialog').remove()
-		return
-
 	# cycle thumbs on hover
-	$('body').on {
-		click: ->
-			clearInterval $(this).data('timer')
-			return
-		mouseenter: ->
-			clearInterval $(this).data('timer')
-			$img = $(this).find('.video-thumb')
-			slides = $img.data('slides')
-			i = 0
-			$(this).data 'timer', setInterval((->
-				$img.attr('src', slides[i])
-				i++
-				i = 0 if i == slides.length
-				return
-			), 500)
-			return
-		mouseleave: ->
-			clearInterval $(this).data('timer')
-			$img = $(this).find('.video-thumb')
-			orig_url = $img.data('original')
-			$img.attr('src', orig_url)
-			return
-	}, '#videos > .video > .panel'
+	thumbSlider('.video-thumb', '#videos > .video > .panel')

@@ -1,8 +1,11 @@
 <div class="col-sm-4 col-md-3">
 	<%= link_to star, class: 'thumbnail' do %>
-	<%= image_tag star.thumbnail, class: 'img-responsive' %>
+	<div class="embed-responsive embed-responsive-16by9">
+		<%= image_tag star.thumbnail, class: 'star-thumb img-responsive center-block', data: { original: star.thumbnail, slides: star.thumbnails } %>
+	</div>
 	<div class="caption text-center">
 		<%= star.name %>
+		<%= content_tag :span, star.videos.count, class: 'badge' %>
 	</div>
 	<% end %>
 </div>

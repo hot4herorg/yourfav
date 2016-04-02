@@ -11,4 +11,8 @@ class Star < ActiveRecord::Base
 		self.videos.first.thumb
 	end
 
+	def thumbnails
+		self.videos.map(&:thumb)
+	end
+
 end
