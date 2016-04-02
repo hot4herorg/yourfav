@@ -1,7 +1,6 @@
 class SitesController < ApplicationController
 
-	before_action :authenticate_user!, except: [:show]
-
+	before_action :authenticate_user!, except: [:index, :show]
 	before_action :set_site, only: [:show, :edit, :update, :destroy]
 
 	# GET /sites
@@ -13,9 +12,7 @@ class SitesController < ApplicationController
 	# GET /sites/1
 	# GET /sites/1.json
 	def show
-		@page_title = @site.name
 		@videos = @site.videos.page(params[:page])
-		render template: 'videos/index'
 	end
 
 	# GET /sites/new
