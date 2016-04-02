@@ -4,23 +4,27 @@ Rails.application.routes.draw do
 
 	devise_for :users, path: :user
 
+	concern :favoritable do
+		member do
+			post '/favorite' => 'favorites#create'
+			delete '/unfavorite' => 'favorites#destroy'
+		end
+	end
+
 	resources :users, only: [:show] do
 		resources :galleries do
 			resources :videos, controller: :gallery_videos, except: [:index, :new]
 		end
-		# resources :favorites
 	end
 
 	get '/video_details' => 'videos#get_video_details', as: 'video_details'
-	resources :videos do
+	resources :videos, concerns: [:favoritable] do
 		member do
 			get '/generate-thumbs' => 'videos#gen_thumbs'
 		end
 		resources :stars, controller: :video_stars
 		resources :gallery_videos, as: :gallery, path: :gallery, only: [:new]
 		# resources :thumbnails
-		# post '/favorite' => 'favorites#create'
-		# delete '/favorite' => 'favorites#destroy', as: :favorite_delete
 	end
 
 	resources :thumbnails
@@ -31,6 +35,6 @@ Rails.application.routes.draw do
 		# get 'video/:key' => 'videos#show'
 	end
 
-	resources :stars
+	resources :stars, concerns: [:favoritable]
 
 end

@@ -6,6 +6,7 @@ class VideosController < ApplicationController
 	# GET /videos.json
 	def index
 		@videos = Video.page(params[:page])
+		@page_title = 'All Videos'
 	end
 
 	# GET /videos/1
@@ -71,6 +72,7 @@ class VideosController < ApplicationController
 	# POST /videos.json
 	def create
 		@video = Video.new(video_params)
+		@video = Video.new PhnetworkScraper::Video.new(@video.url).to_hash if @video.add_by_url
 
 		respond_to do |format|
 			if @video.save
@@ -115,6 +117,6 @@ class VideosController < ApplicationController
 
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def video_params
-		params.require(:video).permit(:url, :key, :title, :site_id, :thumb_url, video_stars_attributes: [:star_id, :_destroy])
+		params.require(:video).permit(:url, :add_by_url, :key, :title, :site_id, :thumb_url, video_stars_attributes: [:star_id, :_destroy])
 	end
 end

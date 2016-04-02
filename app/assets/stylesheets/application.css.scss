@@ -22,6 +22,13 @@ body {
 	margin: 50px 0;
 }
 
+#nav-add-video-dropdown {
+	padding: 10px 15px 0;
+	@media (min-width: $screen-sm-min) {
+		min-width: $screen-xs-min;
+	}
+}
+
 #defaultModal {
 	background: rgba(0,0,0,$modal-backdrop-opacity);
 }

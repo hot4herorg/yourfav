@@ -2,6 +2,10 @@ class Video < ActiveRecord::Base
 
 	acts_as_votable
 
+	attr_accessor :add_by_url
+
+	validates :key, :site, presence: true
+
 	belongs_to :site
 	validates :key, uniqueness: { scope: :site_id }
 

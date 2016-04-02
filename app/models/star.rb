@@ -1,5 +1,7 @@
 class Star < ActiveRecord::Base
 
+	acts_as_votable
+
 	has_many :video_stars, dependent: :destroy
 	has_many :videos, through: :video_stars
 

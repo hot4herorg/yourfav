@@ -3,12 +3,6 @@
 <%= link_to 'New Star', new_star_path, class: 'pull-right' %>
 <h2>Stars</h2>
 
-<ul>
-	<% @stars.each do |star| %>
-	<li><%= star.name %></li>
-	<% end %>
-</ul>
-
 <div class="row">
-	<%= render @stars %>
+	<%= render partial: 'star_thumb', collection: @stars, as: :star %>
 </div>

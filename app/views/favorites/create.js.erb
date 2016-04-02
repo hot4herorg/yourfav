@@ -1,5 +1,0 @@
-$video = $('#video_<%= @video.id %>');
-$html = $('<%= j render("videos/video_thumb", video: @video) %>'+' hello');
-$video.html( $html.find('.panel') );
-
-// $('.btn-video-favorite-<%= @video.id %>').addClass('btn-danger').removeClass('btn-default');

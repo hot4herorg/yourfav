@@ -12,7 +12,8 @@ class UsersController < ApplicationController
 	# GET /users/1
 	# GET /users/1.json
 	def show
-		@videos = @user.favorite_videos.reverse_order.page(params[:page])
+		@videos = @user.get_up_voted(Video).page(params[:page])
+		@stars = @user.get_up_voted(Star)
 	end
 
 	# GET /users/new

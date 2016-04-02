@@ -15,9 +15,7 @@ class StarsController < ApplicationController
 	# GET /stars/1
 	# GET /stars/1.json
 	def show
-		@page_title = @star.name
 		@videos = @star.videos.page(params[:page])
-		render template: 'videos/index'
 	end
 
 	# GET /stars/new
