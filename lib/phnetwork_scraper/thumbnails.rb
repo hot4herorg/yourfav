@@ -59,39 +59,40 @@ module PhnetworkScraper
 				path = File.path uri.path
 				base = File.dirname uri.path
 				ext = File.extname uri.path
+				scheme = uri.scheme + '://'
 
 				case @site.domain
 				when 'pornhub.com', 'tube8.com', 'keezmovies.com', 'extremetube.com'
 					16.times do |index|
-						thumbs << '//' + uri.host + path.gsub(filename, "#{index+1}"+ext)
+						thumbs << scheme + uri.host + path.gsub(filename, "#{index+1}"+ext)
 					end
 				when 'xtube.com'
 					15.times do |index|
-						thumbs << '//' + uri.host + path.gsub(filename, "#{index+1}"+ext)
+						thumbs << scheme + uri.host + path.gsub(filename, "#{index+1}"+ext)
 					end
 				when 'spankwire.com'
 					10.times do |index|
-						thumbs << '//' + uri.host + path.gsub(filename, "#{index+1}"+ext)
+						thumbs << scheme + uri.host + path.gsub(filename, "#{index+1}"+ext)
 					end
 				when 'youporn.com'
 					16.times do |index|
-						thumbs << '//' + uri.host + base.sub(/(\d+)(?!.*\d)/){ |n| "#{index+1}/1#{ext}" }
+						thumbs << scheme + uri.host + base.sub(/(\d+)(?!.*\d)/){ |n| "#{index+1}/1#{ext}" }
 					end
 				when 'spankbang.com'
 					10.times do |index|
-						thumbs << '//' + uri.host + base + '/' + filename.sub(/(\d+)(?!.*\d)/){ |n| index+1 }
+						thumbs << scheme + uri.host + base + '/' + filename.sub(/(\d+)(?!.*\d)/){ |n| index+1 }
 					end
 				when 'redtube.com'
 					16.times do |index|
-						thumbs << '//' + uri.host + base + '/' + filename.sub(/(\d+)(?!.*\d)/){ |n| (index+1).to_s.rjust(3, '0') }
+						thumbs << scheme + uri.host + base + '/' + filename.sub(/(\d+)(?!.*\d)/){ |n| (index+1).to_s.rjust(3, '0') }
 					end
 				when 'xhamster.com'
 					10.times do |index|
-						thumbs << '//' + uri.host + base + '/' + filename.sub(/(\d+)/){ |n| index+1 }
+						thumbs << scheme + uri.host + base + '/' + filename.sub(/(\d+)/){ |n| index+1 }
 					end
 				when 'xvideos.com'
 					30.times do |index|
-						thumbs << '//' + uri.host + base + '/' + filename.sub(/(\d+)(?!.*\d)/){ |n| index+1 }
+						thumbs << scheme + uri.host + base + '/' + filename.sub(/(\d+)(?!.*\d)/){ |n| index+1 }
 					end
 				end
 
