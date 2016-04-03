@@ -1,57 +1,12 @@
 [
    {
-      "id":1,
-      "name":"PornHub",
-      "domain":"pornhub.com",
-      "embed_code":"http://www.pornhub.com/embed/{{key}}",
-      "ph_network":true,
-      "enabled":true,
-      "url":"http://localhost:3000/sites/1.json"
-   },
-   {
-      "id":2,
-      "name":"YouPorn",
-      "domain":"youporn.com",
-      "embed_code":"http://www.youporn.com/embed/{{key}}",
-      "ph_network":true,
-      "enabled":true,
-      "url":"http://localhost:3000/sites/2.json"
-   },
-   {
-      "id":3,
-      "name":"SpankBang",
-      "domain":"spankbang.com",
-      "embed_code":"http://spankbang.com/{{key}}/embed/",
+      "id":8,
+      "name":"ExtremeTube",
+      "domain":"extremetube.com",
+      "embed_code":"http://www.extremetube.com/embed/{{key}}",
       "ph_network":false,
       "enabled":true,
-      "url":"http://localhost:3000/sites/3.json"
-   },
-   {
-      "id":4,
-      "name":"Redtube",
-      "domain":"redtube.com",
-      "embed_code":"http://embed.redtube.com/?id={{key}}",
-      "ph_network":true,
-      "enabled":true,
-      "url":"http://localhost:3000/sites/4.json"
-   },
-   {
-      "id":5,
-      "name":"xHamster",
-      "domain":"xhamster.com",
-      "embed_code":"http://xhamster.com/xembed.php?video={{key}}",
-      "ph_network":false,
-      "enabled":true,
-      "url":"http://localhost:3000/sites/5.json"
-   },
-   {
-      "id":6,
-      "name":"Tube8",
-      "domain":"tube8.com",
-      "embed_code":"http://www.tube8.com/embed/{{key}}",
-      "ph_network":true,
-      "enabled":true,
-      "url":"http://localhost:3000/sites/6.json"
+      "url":"http://localhost:3000/sites/8.json"
    },
    {
       "id":7,
@@ -63,22 +18,40 @@
       "url":"http://localhost:3000/sites/7.json"
    },
    {
-      "id":8,
-      "name":"ExtremeTube",
-      "domain":"extremetube.com",
-      "embed_code":"http://www.extremetube.com/embed/{{key}}",
+      "id":13,
+      "name":"PlayVids",
+      "domain":"playvids.com",
+      "embed_code":"https://www.playvids.com/embed/{{key}}",
       "ph_network":false,
       "enabled":true,
-      "url":"http://localhost:3000/sites/8.json"
+      "url":"http://localhost:3000/sites/13.json"
    },
    {
-      "id":9,
-      "name":"xTube",
-      "domain":"xtube.com",
-      "embed_code":"http://www.xtube.com/embedded/user/play.php?v={{key}}",
+      "id":1,
+      "name":"PornHub",
+      "domain":"pornhub.com",
+      "embed_code":"http://www.pornhub.com/embed/{{key}}",
       "ph_network":true,
       "enabled":true,
-      "url":"http://localhost:3000/sites/9.json"
+      "url":"http://localhost:3000/sites/1.json"
+   },
+   {
+      "id":4,
+      "name":"Redtube",
+      "domain":"redtube.com",
+      "embed_code":"http://embed.redtube.com/?id={{key}}",
+      "ph_network":true,
+      "enabled":true,
+      "url":"http://localhost:3000/sites/4.json"
+   },
+   {
+      "id":3,
+      "name":"SpankBang",
+      "domain":"spankbang.com",
+      "embed_code":"http://spankbang.com/{{key}}/embed/",
+      "ph_network":false,
+      "enabled":true,
+      "url":"http://localhost:3000/sites/3.json"
    },
    {
       "id":10,
@@ -90,13 +63,13 @@
       "url":"http://localhost:3000/sites/10.json"
    },
    {
-      "id":11,
-      "name":"xVideos",
-      "domain":"xvideos.com",
-      "embed_code":"http://flashservice.xvideos.com/embedframe/{{key}}",
-      "ph_network":false,
+      "id":6,
+      "name":"Tube8",
+      "domain":"tube8.com",
+      "embed_code":"http://www.tube8.com/embed/{{key}}",
+      "ph_network":true,
       "enabled":true,
-      "url":"http://localhost:3000/sites/11.json"
+      "url":"http://localhost:3000/sites/6.json"
    },
    {
       "id":12,
@@ -106,5 +79,41 @@
       "ph_network":false,
       "enabled":false,
       "url":"http://localhost:3000/sites/12.json"
+   },
+   {
+      "id":2,
+      "name":"YouPorn",
+      "domain":"youporn.com",
+      "embed_code":"http://www.youporn.com/embed/{{key}}",
+      "ph_network":true,
+      "enabled":true,
+      "url":"http://localhost:3000/sites/2.json"
+   },
+   {
+      "id":5,
+      "name":"xHamster",
+      "domain":"xhamster.com",
+      "embed_code":"http://xhamster.com/xembed.php?video={{key}}",
+      "ph_network":false,
+      "enabled":true,
+      "url":"http://localhost:3000/sites/5.json"
+   },
+   {
+      "id":9,
+      "name":"xTube",
+      "domain":"xtube.com",
+      "embed_code":"http://www.xtube.com/embedded/user/play.php?v={{key}}",
+      "ph_network":true,
+      "enabled":true,
+      "url":"http://localhost:3000/sites/9.json"
+   },
+   {
+      "id":11,
+      "name":"xVideos",
+      "domain":"xvideos.com",
+      "embed_code":"http://flashservice.xvideos.com/embedframe/{{key}}",
+      "ph_network":false,
+      "enabled":true,
+      "url":"http://localhost:3000/sites/11.json"
    }
 ]

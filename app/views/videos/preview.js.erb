@@ -13,7 +13,7 @@ if (<%= @video.valid? %>) {
 	// thumbnails
 	<% @video.thumb_array.each do |thumb| %>
 	$('#video_thumbs').append( $('<img class="img-responsive col-xs-3">').attr('src', '<%= j thumb %>') );
-	<% end if @video.thumb_array.any? %>
+	<% end if @video.thumb_array.present? %>
 
 } else {
 	$('#new_video')[0].reset();
