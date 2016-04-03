@@ -1,3 +1,3 @@
-## Codeship status
+## Heroku Status
 
-![Codeship Status](https://codeship.com/projects/fdaa30e0-cb69-0133-9487-66ebdb7022a4/status?branch=master)
+![Heroku](https://heroku-badge.herokuapp.com/?app=yourfav)
