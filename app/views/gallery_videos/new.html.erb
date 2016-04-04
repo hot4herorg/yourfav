@@ -13,6 +13,14 @@
 </li>
 <% end %>
 
+<%= content_tag :li, nil, role: :separator, class: :divider if current_user.galleries.any? %>
+
+<li>
+	<%= link_to new_user_gallery_path(current_user), class: 'text-center' do %>
+	<i class="fa fa-fw fa-plus"></i> New Gallery
+	<% end %>
+</li>
+
 <% else %>
 
 <%= content_tag :li, link_to('Sign in', new_user_session_path), class: 'text-center' unless user_signed_in? %>
