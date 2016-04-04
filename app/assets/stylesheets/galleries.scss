@@ -16,3 +16,13 @@
 
 	}
 }
+
+#user-galleries {
+	.thumbnail {
+		border: none;
+		margin-bottom: 0;
+		img {
+			margin-top: 5px;
+		}
+	}
+}

@@ -1,0 +1,36 @@
+<div class="col-sm-6 col-md-4">
+	<div class="panel panel-<%= gallery.private ? 'default' : 'success	' %>">
+
+		<header class="panel-heading">
+			<%= link_to content_tag(:i, nil, class: 'fa fa-fw fa-pencil'), edit_user_gallery_path(@user, gallery), class: 'pull-right', data: {toggle: :modal, target: '#defaultModal'} %></td>
+			<h4 class="panel-title">
+				<%= truncate gallery.name, length: 25 %>
+			</h4>
+		</header>
+
+		<% if gallery.videos.any? %>
+		<%= link_to [@user, gallery], class: 'thumbnail', data: {toggle: :modal, target: '#gallery-modal'} do %>
+		<div class="embed-responsive embed-responsive-16by9">
+			<div class="row">
+				<% gallery.videos.each do |video| %>
+				<div class="col-xs-6">
+					<div class="embed-responsive embed-responsive-16by9">
+						<%= image_tag video.thumb, class: 'img-responsive center-block' %>
+					</div>
+				</div>
+				<% end %>
+			</div>
+		</div>
+		<% end %>
+		<% else %>
+		<div class="thumbnail">
+			<div class="embed-responsive embed-responsive-16by9">
+				<p class="text-center lead">
+					There are no Videos in this Gallery
+				</p>
+			</div>
+		</div>
+		<% end %>
+
+	</div>
+</div>
