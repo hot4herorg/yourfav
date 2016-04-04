@@ -1,29 +1,35 @@
-<%= form_for [@user, @gallery] do |f| %>
-<% if @gallery.errors.any? %>
-<div id="error_explanation">
-	<h2><%= pluralize(@gallery.errors.count, "error") %> prohibited this gallery from being saved:</h2>
+<%= form_for [@user, @gallery], remote: true do |f| %>
 
-	<ul>
-		<% @gallery.errors.full_messages.each do |message| %>
-		<li><%= message %></li>
-		<% end %>
-	</ul>
+<div class="modal-body">
+
+	<% if @gallery.errors.any? %>
+	<div id="error_explanation">
+		<strong><%= pluralize(@gallery.errors.count, "error") %> prohibited this gallery from being saved:</strong>
+		<ul>
+			<% @gallery.errors.full_messages.each do |message| %>
+			<li><%= message %></li>
+			<% end %>
+		</ul>
+	</div>
+	<% end %>
+
+	<%= f.hidden_field :user_id %>
+
+	<div class="form-group">
+		<%= f.label :name %>
+		<%= f.text_field :name, class: 'form-control' %>
+	</div>
+	<div class="form-group">
+		<%= f.check_box :private %>
+		<%= f.label :private, 'Private?' %>
+	</div>
+
 </div>
-<% end %>
 
-<%= f.hidden_field :user_id %>
+<footer class="modal-footer">
+	<button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancel</button>
+	<%= link_to 'Delete', [@user, @gallery], class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: 'Are you sure?' } if @gallery.persisted? %>
+	<%= f.submit nil, class: 'btn btn-sm btn-primary' %>
+</footer>
 
-<div class="form-group">
-	<%= f.label :name %>
-	<%= f.text_field :name, class: 'form-control' %>
-</div>
-<div class="form-group">
-	<%= f.check_box :private %>
-	<%= f.label :private, 'Private?' %>
-</div>
-
-
-<div class="actions">
-	<%= f.submit %>
-</div>
 <% end %>

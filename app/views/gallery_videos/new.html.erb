@@ -16,7 +16,7 @@
 <%= content_tag :li, nil, role: :separator, class: :divider if current_user.galleries.any? %>
 
 <li>
-	<%= link_to new_user_gallery_path(current_user), class: 'text-center small' do %>
+	<%= link_to new_user_gallery_path(current_user), class: 'text-center small', data: {toggle: :modal, target: '#defaultModal'} do %>
 	<i class="fa fa-fw fa-plus"></i> New Gallery
 	<% end %>
 </li>

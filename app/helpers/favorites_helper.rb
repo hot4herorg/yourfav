@@ -14,7 +14,7 @@ module FavoritesHelper
 	end
 
 	def favorite_video_li(video, text=nil)
-		text ||= content_tag(:i, nil, class: 'fa fa-heart')
+		text ||= content_tag(:i, nil, class: ['fa fa-heart', ('text-danger' unless current_user.liked? video)])
 		if current_user.liked? video
 			content_tag :li, link_to(text, unfavorite_video_path(video), method: :delete, remote: :true), class: 'favorite-item text-center active'
 		else

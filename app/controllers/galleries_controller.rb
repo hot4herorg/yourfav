@@ -40,11 +40,13 @@ class GalleriesController < ApplicationController
 	# GET /galleries/new
 	def new
 		@gallery = Gallery.new user: @user
+		render :new, layout: false if request.xhr?
 	end
 
 	# GET /galleries/1/edit
 	def edit
 		@gallery.gallery_videos.build
+		render :edit, layout: false if request.xhr?
 	end
 
 	# POST /galleries
@@ -57,6 +59,7 @@ class GalleriesController < ApplicationController
 			if @gallery.save
 				format.html { redirect_to [@user, @gallery], notice: 'Gallery was successfully created.' }
 				format.json { render :show, status: :created, location: @gallery }
+				format.js { render :update }
 			else
 				format.html { render :new }
 				format.json { render json: @gallery.errors, status: :unprocessable_entity }
@@ -71,6 +74,7 @@ class GalleriesController < ApplicationController
 			if @gallery.update(gallery_params)
 				format.html { redirect_to [@user, @gallery], notice: 'Gallery was successfully updated.' }
 				format.json { render :show, status: :ok, location: @gallery }
+				format.js { render :update }
 			else
 				format.html { render :edit }
 				format.json { render json: @gallery.errors, status: :unprocessable_entity }
@@ -85,6 +89,7 @@ class GalleriesController < ApplicationController
 		respond_to do |format|
 			format.html { redirect_to user_galleries_path(@user), notice: 'Gallery was successfully destroyed.' }
 			format.json { head :no_content }
+			format.js { render :update }
 		end
 	end
 
