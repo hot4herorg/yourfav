@@ -34,7 +34,7 @@
 
 						<li role="separator" class="divider"></li>
 						<li>
-							<%= link_to_unless user_signed_in?, 'Sign in', new_user_session_path do %>
+							<%= link_to_unless user_signed_in?, 'Register', new_user_registration_path do %>
 							<%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
 							<% end %>
 						</li>
