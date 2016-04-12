@@ -3,6 +3,7 @@ class Video < ActiveRecord::Base
 	acts_as_votable
 
 	attr_accessor :add_by_url
+	before_validation :create_by_url
 
 	validates :url, :key, :site, :thumb_url, presence: true
 
@@ -46,5 +47,9 @@ class Video < ActiveRecord::Base
 	end
 
 	private
+
+	def create_by_url
+		self.assign_attributes PhnetworkScraper::Video.new(url).to_params_hash if add_by_url
+	end
 
 end

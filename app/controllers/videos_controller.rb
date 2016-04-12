@@ -14,6 +14,11 @@ class VideosController < ApplicationController
 
 	def preview
 		@video = PhnetworkScraper::Video.new params[:url]
+
+		@yf_video = Video.find_or_create_by(site: @video.site, key: @video.key) do |video|
+			video.add_by_url = true
+			video.url = @video.url
+		end if @video.valid?
 	end
 
 	def generate_thumbs
@@ -34,7 +39,7 @@ class VideosController < ApplicationController
 	# POST /videos.json
 	def create
 		@video = Video.new(video_params)
-		@video = Video.new PhnetworkScraper::Video.new(@video.url).to_params_hash if @video.add_by_url
+		# @video = Video.new PhnetworkScraper::Video.new(@video.url).to_params_hash if @video.add_by_url
 
 		respond_to do |format|
 			if @video.save
