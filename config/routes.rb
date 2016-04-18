@@ -2,9 +2,9 @@ Rails.application.routes.draw do
 
 	devise_for :users, path: :user
 
-	# authenticated :user do
-	# 	root 'videos#index', as: :authenticated_root
-	# end
+	authenticated :user do
+		root 'users#show', as: :authenticated_root
+	end
 
 	root 'static_pages#home'
 
