@@ -4,6 +4,11 @@
 
 $ ->
 
+	# star tokens
+	$('#video_star_tokens').tokenInput '/stars.json',
+		theme: 'bootstrap'
+		prePopulate: $('#video_star_tokens').data('load')
+
 	# Masonry + ImagesLoaded + infinitescroll
 	$container = $('#videos')
 	# Masonry + ImagesLoaded

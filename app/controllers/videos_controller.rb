@@ -59,6 +59,7 @@ class VideosController < ApplicationController
 			if @video.update(video_params)
 				format.html { redirect_to @video, notice: 'Video was successfully updated.' }
 				format.json { render :show, status: :ok, location: @video }
+				format.js { render :update, status: :ok, location: @video }
 			else
 				format.html { render :edit }
 				format.json { render json: @video.errors, status: :unprocessable_entity }
@@ -84,6 +85,6 @@ class VideosController < ApplicationController
 
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def video_params
-		params.require(:video).permit(:url, :add_by_url, :key, :title, :site_id, :thumb_url, video_stars_attributes: [:star_id, :_destroy])
+		params.require(:video).permit(:url, :add_by_url, :key, :title, :site_id, :thumb_url, :star_tokens, video_stars_attributes: [:star_id, :_destroy])
 	end
 end

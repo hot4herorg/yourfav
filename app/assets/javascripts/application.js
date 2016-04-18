@@ -17,6 +17,7 @@
 //= require masonry.min
 //= require imagesLoaded.min
 //= require transit.min
+//= require jquery.tokeninput
 //= require_tree .
 
 // cycle through thumbnails

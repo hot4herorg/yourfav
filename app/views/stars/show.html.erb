@@ -1,6 +1,7 @@
 <% @page_title = nil %>
 
 <header class="page-header">
+	<%= link_to 'Edit', [:edit, @star], class: 'pull-right' %>
 	<h2>
 		<%= @star.name %>
 		<%= favorite_star_btn @star %>

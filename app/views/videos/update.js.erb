@@ -1,0 +1,1 @@
+$('#stars').html('<%= j @video.stars.map{ |s| link_to(s.name, s) }.join(', ').html_safe if @video.stars.any? %>');

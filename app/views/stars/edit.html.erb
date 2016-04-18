@@ -2,5 +2,6 @@
 
 <%= render 'form' %>
 
+<%= link_to 'Delete', @star, data: { confirm: "Are you sure?" }, method: :delete %> |
 <%= link_to 'Show', @star %> |
 <%= link_to 'Back', stars_path %>

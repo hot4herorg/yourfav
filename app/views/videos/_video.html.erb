@@ -10,9 +10,11 @@
 
 <p>
 	<strong>Stars:</strong>
-	<%= link_to raw('<i class="fa fa-fw fa-plus"></i>'), new_video_star_path(video) %>
+	<%= link_to raw('<i class="fa fa-fw fa-pencil"></i>'), new_video_star_path(video), remote: true %>
 	<br>
 
-	<%= video.stars.map{ |s| link_to(s.name, s) }.join(', ').html_safe if video.stars.any? %>
+	<div id="stars" class="">
+		<%= video.stars.map{ |s| link_to(s.name, s) }.join(', ').html_safe if video.stars.any? %>
+	</div>
 
 </p>

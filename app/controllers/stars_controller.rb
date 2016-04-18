@@ -4,12 +4,14 @@ class StarsController < ApplicationController
 	before_action :authenticate_user!, except: [:index, :show]
 	before_action :set_star, only: [:show, :edit, :update, :destroy]
 
-	# autocomplete :name
-
 	# GET /stars
 	# GET /stars.json
 	def index
 		@stars = Star.has_videos
+		respond_to do |format|
+			format.html
+			format.json { @stars = Star.tokens(params[:q]) }
+		end
 	end
 
 	# GET /stars/1

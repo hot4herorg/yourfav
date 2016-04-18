@@ -2,6 +2,12 @@ class Video < ActiveRecord::Base
 
 	acts_as_votable
 
+	# extend StarTokens
+	attr_accessor :star_tokens
+	def star_tokens=(ids)
+		self.star_ids = Star.ids_from_tokens(ids)
+	end
+
 	attr_accessor :add_by_url
 	before_validation :create_by_url
 
