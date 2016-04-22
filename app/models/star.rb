@@ -25,7 +25,7 @@ class Star < ActiveRecord::Base
 	def self.tokens(query)
 		stars = where("name like ?", "%#{query}%")
 		if stars.empty?
-			[{id: "<<<#{query}>>>", name: "New: \"#{query}\""}]
+			[{id: "<<<#{query}>>>", name: "New: \"#{query.titleize}\""}]
 		else
 			stars
 		end
