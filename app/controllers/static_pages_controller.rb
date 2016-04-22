@@ -1,5 +1,7 @@
 class StaticPagesController < ApplicationController
 
+	before_action :authenticate_admin!, only: [:test]
+
 	def home
 	end
 

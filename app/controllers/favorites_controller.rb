@@ -1,6 +1,7 @@
 class FavoritesController < ApplicationController
 
 	before_action :authenticate_user!, except: []
+	
 	before_action :set_object, except: [:index]
 
 	def create

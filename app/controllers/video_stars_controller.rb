@@ -1,5 +1,7 @@
 class VideoStarsController < ApplicationController
 
+	# before_action :authenticate_user!, except: [:index, :show]
+
 	before_action :set_video, except: [:autocomplete]
 	before_action :set_video_star, only: [:destroy]
 
