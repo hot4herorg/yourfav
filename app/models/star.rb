@@ -4,16 +4,15 @@ class Star < ActiveRecord::Base
 
 	attr_accessor :star_tokens
 
+	validates :name, presence: true
+	before_save :titleize_name
+
 	has_many :video_stars, dependent: :destroy
 	has_many :videos, through: :video_stars
 
 	default_scope { includes(:videos).order(:name) }
 
 	scope :has_videos, -> { where.not('videos.id' => nil) }
-
-	def name
-		self[:name].titleize
-	end
 
 	def thumbnail
 		self.videos.first.thumb
@@ -35,6 +34,12 @@ class Star < ActiveRecord::Base
 	def self.ids_from_tokens(tokens)
 		tokens.gsub!(/<<<(.+?)>>>/){ self.create!(name: $1).id }
 		tokens.split(',')
+	end
+
+	private
+
+	def titleize_name
+		self.name = name.titleize if name.present?
 	end
 
 end
