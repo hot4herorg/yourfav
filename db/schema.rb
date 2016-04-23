@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160327224123) do
+ActiveRecord::Schema.define(version: 20160422233657) do
 
   create_table "galleries", force: :cascade do |t|
     t.string   "name"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20160327224123) do
     t.integer  "video_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "position"
   end
 
   add_index "gallery_videos", ["gallery_id"], name: "index_gallery_videos_on_gallery_id"

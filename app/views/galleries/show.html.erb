@@ -1,19 +1,17 @@
-<p id="notice"><%= notice %></p>
-
-<%= content_tag :h2, @gallery.name %>
-
-<%#= render @gallery.videos %>
+<header class="page-header">
+	<ul class="list-inline pull-right">
+		<%= content_tag :li, link_to('Edit', edit_user_gallery_path(@user, @gallery), data: {toggle: :modal, target: '#defaultModal'}) %>
+		<%= content_tag :li, link_to('Back', user_galleries_path(@user)) %>
+	</ul>
+	<%= content_tag :h2, @gallery.name %>
+</header>
 
 <div class="row">
-	<% @gallery.videos.each do |video| %>
+	<% @gallery.videos_of_gallery.first(4).each do |video| %>
 	<div class="col-sm-6">
-		<%= render 'videos/embed', video: video %>
-		<%= link_to 'x Gallery', user_gallery_video_path(current_user, @gallery, video), class: 'btn btn-sm btn-warning', remote: false, method: :delete, confirm: 'Are you sure?' %>
+		<div class="thumbnail">
+			<%= render video %>
+		</div>
 	</div>
 	<% end %>
 </div>
-
-<hr>
-
-<%= link_to 'Edit', edit_user_gallery_path(@user, @gallery) %> |
-<%= link_to 'Back', user_galleries_path(@user) %>

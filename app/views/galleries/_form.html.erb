@@ -1,7 +1,6 @@
 <%= form_for [@user, @gallery], remote: true do |f| %>
 
 <div class="modal-body">
-
 	<% if @gallery.errors.any? %>
 	<div id="error_explanation">
 		<strong><%= pluralize(@gallery.errors.count, "error") %> prohibited this gallery from being saved:</strong>
@@ -15,14 +14,35 @@
 
 	<%= f.hidden_field :user_id %>
 
-	<div class="form-group">
-		<%= f.label :name %>
-		<%= f.text_field :name, class: 'form-control' %>
+	<div class="row">
+		<div class="col-sm-9">
+			<div class="form-group">
+				<%= f.label :name %>
+				<%= f.text_field :name, class: 'form-control' %>
+			</div>
+		</div>
+		<div class="col-sm-3">
+			<div class="form-group">
+				<%= f.label :private, 'Private?' %><br>
+				<%= f.check_box :private %>
+			</div>
+		</div>
 	</div>
-	<div class="form-group">
-		<%= f.check_box :private %>
-		<%= f.label :private, 'Private?' %>
-	</div>
+
+	<h4>Videos</h4>
+	<table class="table table-condensed">
+		<% @gallery.gallery_videos.each do |vid| %>
+			<%= content_tag_for :tr, vid do %>
+			<td><i class="fa fa-fw fa-bars"></i></td>
+			<td><%= vid.video.try(:title) %></td>
+			<td>
+				<%= link_to '<i class="fa fa-fw fa-remove"></i>'.html_safe, user_gallery_video_path(current_user, @gallery, vid.video), class: 'text-danger', remote: false, method: :delete, data: {confirm: 'Are you sure?'} %>
+			</td>
+			<% end %>
+		<% end %>
+	</table>
+
+
 
 </div>
 

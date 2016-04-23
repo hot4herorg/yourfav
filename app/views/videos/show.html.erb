@@ -5,9 +5,26 @@
 			<%= link_to 'Edit', edit_video_path(@video), class: 'btn btn-sm btn-danger pull-left' if user_signed_in? %>
 			<h4 class="modal-title text-center"><%= @video.title %></h4>
 		</div>
-		<%= render 'videos/embed', video: @video %>
+		<%= render @video %>
 		<div class="modal-body">
-			<%= render @video %>
+
+			<p>
+				<strong>Site:</strong>
+				<%= link_to @video.site.name, @video.site %>
+			</p>
+			<p>
+				<strong>Url:</strong>
+				<%= link_to 'Original Link', @video.url, target: '_blank' %>
+			</p>
+			<p>
+				<strong>Stars:</strong>
+				<%= link_to raw('<i class="fa fa-fw fa-pencil"></i>'), new_video_star_path(@video), remote: true %>
+				<br>
+				<div id="stars" class="">
+					<%= @video.stars.map{ |s| link_to(s.name, s) }.join(', ').html_safe if @video.stars.any? %>
+				</div>
+			</p>
+
 		</div>
 		<div class="modal-footer">
 			<%= render 'videos/video_actions', video: @video, dropup: true %>

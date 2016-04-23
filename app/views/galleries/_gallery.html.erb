@@ -8,11 +8,12 @@
 			</h4>
 		</header>
 
-		<% if gallery.videos.any? %>
-		<%= link_to [@user, gallery], class: 'thumbnail', data: {toggle: :modal, target: '#gallery-modal'} do %>
+		<% if gallery.videos_of_gallery.any? %>
+		<%#= link_to [@user, gallery], class: 'thumbnail', data: {toggle: :modal, target: '#gallery-modal'} do %>
+		<%= link_to [@user, gallery], class: 'thumbnail' do %>
 		<div class="embed-responsive embed-responsive-16by9">
 			<div class="row">
-				<% gallery.videos.each do |video| %>
+				<% gallery.videos_of_gallery.each do |video| %>
 				<div class="col-xs-6">
 					<div class="embed-responsive embed-responsive-16by9">
 						<%= image_tag video.thumb, class: 'img-responsive center-block' %>

@@ -13,7 +13,7 @@
 				<% @gallery.videos.limit(4).each do |video| %>
 				<div class="col-sm-6">
 					<div class="thumbnail">
-						<%= render 'videos/embed', video: video %>
+						<%= render video %>
 					</div>
 				</div>
 				<% end %>
