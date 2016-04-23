@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
 	resources :users, only: [:show] do
 		resources :galleries do
+			resources :gallery_videos, as: :videos, only: [:index], concerns: [:sortable]
 			resources :videos, controller: :gallery_videos, except: [:index, :new]
 		end
 	end

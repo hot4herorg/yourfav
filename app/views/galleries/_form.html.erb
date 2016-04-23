@@ -29,20 +29,7 @@
 		</div>
 	</div>
 
-	<h4>Videos</h4>
-	<table class="table table-condensed">
-		<% @gallery.gallery_videos.each do |vid| %>
-			<%= content_tag_for :tr, vid do %>
-			<td><i class="fa fa-fw fa-bars"></i></td>
-			<td><%= vid.video.try(:title) %></td>
-			<td>
-				<%= link_to '<i class="fa fa-fw fa-remove"></i>'.html_safe, user_gallery_video_path(current_user, @gallery, vid.video), class: 'text-danger', remote: false, method: :delete, data: {confirm: 'Are you sure?'} %>
-			</td>
-			<% end %>
-		<% end %>
-	</table>
-
-
+	<%= render template: 'gallery_videos/index' %>
 
 </div>
 

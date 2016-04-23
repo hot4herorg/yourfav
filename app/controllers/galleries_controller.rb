@@ -46,7 +46,7 @@ class GalleriesController < ApplicationController
 
 	# GET /galleries/1/edit
 	def edit
-		# @gallery.gallery_videos.build
+		@gallery_videos = @gallery.gallery_videos
 		render :edit, layout: false if request.xhr?
 	end
 

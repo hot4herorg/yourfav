@@ -1,25 +1,8 @@
-<p id="notice"><%= notice %></p>
+<%#= link_to 'New Gallery video', new_gallery_video_path %>
 
-<h1>Listing Gallery Videos</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @gallery_videos.each do |gallery_video| %>
-      <tr>
-        <td><%= link_to 'Show', gallery_video %></td>
-        <td><%= link_to 'Edit', edit_gallery_video_path(gallery_video) %></td>
-        <td><%= link_to 'Destroy', gallery_video, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
+<h4>Videos</h4>
+<table class="table table-condensed">
+	<tbody id="gallery_videos" data-sort-path="<%= sort_user_gallery_videos_path(current_user, @gallery) %>" >
+		<%= render @gallery_videos %>
+	</tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Gallery video', new_gallery_video_path %>

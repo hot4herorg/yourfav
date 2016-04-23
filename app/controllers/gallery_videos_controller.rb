@@ -1,5 +1,7 @@
 class GalleryVideosController < ApplicationController
 
+	include Sortable
+
 	before_action :set_user, except: [:new]
 	before_action :set_gallery, except: [:index, :new]
 	before_action :set_gallery_video, only: [:show, :edit, :update, :destroy]
