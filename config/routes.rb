@@ -15,6 +15,12 @@ Rails.application.routes.draw do
 		end
 	end
 
+	concern :sortable do
+		collection do
+			post :sort
+		end
+	end
+
 	resources :users, only: [:show] do
 		resources :galleries do
 			resources :videos, controller: :gallery_videos, except: [:index, :new]

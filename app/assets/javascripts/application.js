@@ -18,6 +18,7 @@
 //= require imagesLoaded.min
 //= require transit.min
 //= require jquery.tokeninput
+//= require jquery-ui.min
 //= require_tree .
 
 // cycle through thumbnails
