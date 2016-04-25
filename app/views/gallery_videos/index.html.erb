@@ -3,6 +3,6 @@
 <h4>Videos</h4>
 <table class="table table-condensed">
 	<tbody id="gallery_videos" data-sort-path="<%= sort_user_gallery_videos_path(current_user, @gallery) %>" >
-		<%= render @gallery_videos %>
+		<%= render partial: 'gallery_videos/gallery_video_list_item', collection: @gallery_videos, as: :gallery_video %>
 	</tbody>
 </table>

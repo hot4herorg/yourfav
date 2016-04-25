@@ -65,3 +65,9 @@ body {
 		}
 	}
 }
+
+#gallery_videos {
+	tr:nth-child(-n+4){
+		background: $state-success-bg;
+	}
+}

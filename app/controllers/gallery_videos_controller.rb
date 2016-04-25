@@ -1,13 +1,20 @@
 class GalleryVideosController < ApplicationController
 
-	include Sortable
+	# include Sortable
 
 	before_action :set_user, except: [:new]
 	before_action :set_gallery, except: [:index, :new]
 	before_action :set_gallery_video, only: [:show, :edit, :update, :destroy]
-	before_action :set_video, except: [:new]
+	before_action :set_video, except: [:new, :sort]
 
 	layout false, only: [:new]
+
+	def sort
+		params[:gallery_video].each_with_index do |id, index|
+			GalleryVideo.update id, position: index+1
+		end
+		render nothing: true
+	end
 
 	# GET /gallery_videos
 	# GET /gallery_videos.json

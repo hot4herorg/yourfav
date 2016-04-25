@@ -71,6 +71,9 @@ class GalleriesController < ApplicationController
 	# PATCH/PUT /galleries/1
 	# PATCH/PUT /galleries/1.json
 	def update
+
+		@gallery_videos = @gallery.gallery_videos
+
 		respond_to do |format|
 			if @gallery.update(gallery_params)
 				format.html { redirect_to [@user, @gallery], notice: 'Gallery was successfully updated.' }

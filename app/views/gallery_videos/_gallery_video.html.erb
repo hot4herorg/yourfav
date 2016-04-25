@@ -1,10 +1,5 @@
-<%= content_tag_for :tr, gallery_video do %>
-<td><i class="fa fa-fw fa-bars handle"></i></td>
-<td><%= gallery_video.video.try(:title) %></td>
-<td>
-	<%= link_to '<i class="fa fa-fw fa-remove"></i>'.html_safe, user_gallery_video_path(current_user, @gallery, gallery_video.video), class: 'text-danger', remote: false, method: :delete, data: {confirm: 'Are you sure?'} %>
-</td>
-<td class="text-center">
-	<%= image_tag gallery_video.video.thumb, style: 'max-height: 19px;', class: 'gallery-video-thumb', data: { content: render('gallery_videos/popover', video: gallery_video.video) } %>
-</td>
+<%= content_tag_for :div, gallery_video, class: 'col-sm-6' do %>
+<div class="thumbnail">
+	<%= render gallery_video.video %>
+</div>
 <% end %>

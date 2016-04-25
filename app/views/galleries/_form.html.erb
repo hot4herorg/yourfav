@@ -29,12 +29,12 @@
 		</div>
 	</div>
 
-	<%= render template: 'gallery_videos/index' %>
+	<%= render template: 'gallery_videos/index' if @gallery.videos.any? %>
 
 </div>
 
 <footer class="modal-footer">
-	<button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancel</button>
+	<%= link_to 'Cancel', user_galleries_path(current_user), class: 'btn btn-sm btn-default', data: { dismiss: :modal } %>
 	<%= link_to 'Delete', [@user, @gallery], class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: 'Are you sure?' } if @gallery.persisted? %>
 	<%= f.submit nil, class: 'btn btn-sm btn-primary' %>
 </footer>

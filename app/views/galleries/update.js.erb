@@ -2,3 +2,21 @@ $('#defaultModal').modal('hide');
 
 wiggleElem('#navbar-galleries');
 wiggleElem('.navbar-toggle');
+
+$('#gallery-title').text("<%= @gallery.name %>");
+
+// $galleryVideos = $('#gallery-container .gallery_video');
+// console.log("");
+
+$galleryVideos = $('#gallery-container .gallery_video').each(function(){
+	return $(this);
+});
+
+<% @gallery_videos.each do |gv| %>
+
+	$gv = $('#gallery_video_<%= gv.id %>');
+
+	// console.log( $.inArray( $gv, $galleryVideos ) );
+	console.log( $galleryVideos );
+
+<% end %>

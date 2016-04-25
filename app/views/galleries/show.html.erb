@@ -1,17 +1,13 @@
-<header class="page-header">
-	<ul class="list-inline pull-right">
-		<%= content_tag :li, link_to('Edit', edit_user_gallery_path(@user, @gallery), data: {toggle: :modal, target: '#defaultModal'}) %>
-		<%= content_tag :li, link_to('Back', user_galleries_path(@user)) %>
-	</ul>
-	<%= content_tag :h2, @gallery.name %>
-</header>
+<section id="gallery-container">
+	<header class="page-header">
+		<ul class="list-inline pull-right">
+			<%= content_tag :li, link_to('Edit', edit_user_gallery_path(@user, @gallery), data: {toggle: :modal, target: '#defaultModal'}) %>
+			<%= content_tag :li, link_to('Back', user_galleries_path(@user)) %>
+		</ul>
+		<%= content_tag :h2, @gallery.name, id: 'gallery-title' %>
+	</header>
 
-<div class="row">
-	<% @gallery.videos_of_gallery.first(4).each do |video| %>
-	<div class="col-sm-6">
-		<div class="thumbnail">
-			<%= render video %>
-		</div>
+	<div class="row">
+		<%= render @gallery.gallery_videos.first(4) %>
 	</div>
-	<% end %>
-</div>
+</section>
