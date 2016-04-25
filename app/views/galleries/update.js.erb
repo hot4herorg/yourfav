@@ -5,18 +5,26 @@ wiggleElem('.navbar-toggle');
 
 $('#gallery-title').text("<%= @gallery.name %>");
 
-// $galleryVideos = $('#gallery-container .gallery_video');
+// galleryVideos = $('#gallery-container .gallery_video');
 // console.log("");
 
-$galleryVideos = $('#gallery-container .gallery_video').each(function(){
-	return $(this);
-});
-
-<% @gallery_videos.each do |gv| %>
-
-	$gv = $('#gallery_video_<%= gv.id %>');
-
-	// console.log( $.inArray( $gv, $galleryVideos ) );
-	console.log( $galleryVideos );
-
-<% end %>
+// var galleryVideos = [];
+//
+// $('#gallery-container #gallery-videos .gallery_video').each(function(){
+// 	galleryVideos.push($(this));
+// });
+//
+// var update_videos = function() {
+// 	<% @gallery_videos.first(4).each do |gv| %>
+// 	$gv = $('#gallery_video_<%= gv.id %>');
+//
+// 	if ($gv.length) {
+// 		console.log('vid exists on page');
+// 		$gv.appendTo('#gallery-videos');
+// 	} else {
+// 		$gv.remove();
+// 	}
+// 	<% end %>
+// });
+//
+// update_videos();

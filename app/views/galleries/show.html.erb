@@ -7,7 +7,7 @@
 		<%= content_tag :h2, @gallery.name, id: 'gallery-title' %>
 	</header>
 
-	<div class="row">
+	<div id="gallery-videos" class="row">
 		<%= render @gallery.gallery_videos.first(4) %>
 	</div>
 </section>
