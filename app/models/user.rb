@@ -7,4 +7,8 @@ class User < ActiveRecord::Base
 
 	has_many :galleries
 
+	def is_admin?
+		self.admin
+	end
+
 end
