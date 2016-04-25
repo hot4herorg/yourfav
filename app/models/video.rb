@@ -45,6 +45,7 @@ class Video < ActiveRecord::Base
 	end
 
 	def gen_thumbs
+		# self.thumbnails.destroy_all if x?
 		if self.thumb_url.present?
 			PhnetworkScraper::Thumbnails.of(self).each do |url|
 				self.thumbnails.find_or_create_by(url: url)

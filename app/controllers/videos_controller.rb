@@ -1,7 +1,7 @@
 class VideosController < ApplicationController
 
 	before_action :authenticate_user!, except: [:index, :show, :new, :create, :preview]
-	before_action :authenticate_user!, only: [:destroy]
+	before_action :authenticate_admin!, only: [:destroy]
 
 	before_action :set_video, only: [:show, :edit, :update, :destroy, :generate_thumbs]
 
@@ -16,11 +16,6 @@ class VideosController < ApplicationController
 
 	def preview
 		@video = PhnetworkScraper::Video.new params[:url]
-
-		@yf_video = Video.find_or_create_by(site: @video.site, key: @video.key) do |video|
-			video.add_by_url = true
-			video.url = @video.url
-		end if @video.valid?
 	end
 
 	def generate_thumbs
