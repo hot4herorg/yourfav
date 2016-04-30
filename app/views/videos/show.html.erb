@@ -8,14 +8,17 @@
 		<%= render @video %>
 		<div class="modal-body">
 
-			<p>
-				<strong>Site:</strong>
-				<%= link_to @video.site.name, @video.site %>
-			</p>
-			<p>
-				<strong>Url:</strong>
-				<%= link_to 'Original Link', @video.url, target: '_blank' %>
-			</p>
+			<strong class="pull-left">Site: &nbsp;</strong>
+			<ul class="list-inline pull-left">
+				<li>
+					<%= link_to @video.site.name, @video.site %>
+				</li>
+				<li>
+					<%= link_to '<i class="fa fa-external-link"></i>'.html_safe, @video.url, title: 'Original Link', target: '_blank' %>
+				</li>
+			</ul>
+			<span class="clearfix"></span>
+
 			<p>
 				<strong>Stars:</strong>
 				<%= link_to raw('<i class="fa fa-fw fa-pencil"></i>'), new_video_star_path(@video), remote: true %>
