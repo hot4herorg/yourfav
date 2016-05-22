@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :links
 	devise_for :users, path: :user
 
 	authenticated :user do
