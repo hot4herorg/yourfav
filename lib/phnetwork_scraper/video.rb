@@ -12,9 +12,8 @@ module PhnetworkScraper
 				@key = get_key
 				@embed_code = @site.embed_code.gsub("{{key}}", @key.to_s)
 				@title = get_title
-				# @thumb_url = get_thumb_url
-				@thumb_url = URI.decode PhnetworkScraper::Thumbnail.new(self).url
-				@thumb_array = PhnetworkScraper::Thumbnails.of self
+				@thumb_url = PhnetworkScraper::Thumbnail.new(self).url
+				@thumb_array = PhnetworkScraper::Thumbnails.of(self)
 			end
 		end
 
@@ -92,35 +91,6 @@ module PhnetworkScraper
 				title = nil.to_s
 			end
 			title = title.gsub(/[^0-9A-Za-z\s]/i, '').squish.titleize
-		rescue
-			nil
-		end
-
-		def get_thumb_url
-			page = Nokogiri::HTML open(@embed_code)
-			case @site.domain
-			when 'pornhub.com', 'keezmovies.com', 'extremetube.com', 'xtube.com'
-				match_var = 'image_url'
-			when 'youporn.com', 'redtube.com', 'tube8.com'
-				match_var = 'poster'
-			when 'spankbang.com'
-				match_var = 'cover_image'
-			when 'xhamster.com'
-				match_var = 'thumb'
-			when 'spankwire.com'
-				match_var = 'posterUrl'
-			when 'playvids.com'
-				match_var = 'big_thumb'
-				return URI.decode page.css('#video > embed').attribute('flashvars').text.match(/#{match_var}(.*?)((?:https?|\/\/)(.*?)(?:png|jpe?g|gif))/)[2].gsub('\/', '/')
-			when 'xvideos.com'
-				page = Nokogiri::HTML open(@url)
-				return page.css('#player > embed').to_s.match(/thumb=(.*?)*(.*?)&/)[2].gsub('\/', '/')
-			else
-				return nil
-			end
-
-			URI.decode(page.text).match(/#{match_var}(.*?)((?:https?|\/\/)(.*?)(?:png|jpe?g|gif))/)[2].gsub('\/', '/')
-
 		rescue
 			nil
 		end

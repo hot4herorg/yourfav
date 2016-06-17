@@ -19,18 +19,19 @@ module PhnetworkScraper
 			when 'spankwire.com'
 				match_var = 'posterUrl'
 			when 'tube8.com'
-				return @url = page.css('#flvplayer video').first.attribute('poster').text
+				url = page.css('#flvplayer video').first.attribute('poster').text
 			when 'xvideos.com'
 				page = Nokogiri::HTML open(video.url)
-				return @url = page.css('#player > embed').to_s.match(/thumb=(.*?)*(.*?)&/)[2].gsub('\/', '/')
+				url = page.xpath("//meta[@property='og:image']/@content").first
 			when 'playvids.com'
 				match_var = 'big_thumb'
-				return @url = page.css('#video > embed').attribute('flashvars').text.match(/#{match_var}(.*?)((?:https?|\/\/)(.*?)(?:png|jpe?g|gif))/)[2].gsub('\/', '/')
+				url = page.css('#video > embed').attribute('flashvars').text.match(/#{match_var}(.*?)((?:https?|\/\/)(.*?)(?:png|jpe?g|gif))/)[2].gsub('\/', '/')
 			else
 				return nil
 			end
 
 			@url = URI.decode(page.text).match(/#{match_var}(.*?)((?:https?|\/\/)(.*?)(?:png|jpe?g|gif))/)[2].gsub('\/', '/')
+			@url = url if url.present?
 
 		rescue
 			nil
@@ -59,7 +60,8 @@ module PhnetworkScraper
 				path = File.path uri.path
 				base = File.dirname uri.path
 				ext = File.extname uri.path
-				scheme = uri.scheme + '://'
+				# scheme = uri.scheme + '://'
+				scheme = (uri.scheme.blank? ? 'http://' : uri.scheme + '://')
 
 				case @site.domain
 				when 'pornhub.com', 'tube8.com', 'keezmovies.com', 'extremetube.com'
