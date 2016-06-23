@@ -28,6 +28,15 @@
 				</div>
 			</p>
 
+			<% if @video.gfy.present? %>
+			<div class="embed-responsive embed-responsive-16by9">
+				<video class="embed-responsive-item gfy" loop>
+					<source src="<%= @video.gfy %>" />
+					Your browser does not support the video tag.
+				</video>
+			</div>
+			<% end %>
+
 		</div>
 		<div class="modal-footer">
 			<%= render 'videos/video_actions', video: @video, dropup: true %>

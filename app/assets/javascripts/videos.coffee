@@ -4,6 +4,16 @@
 
 $ ->
 
+	# play gfy on hover
+	$('body').on
+		mouseenter: ->
+			$(this).get(0).play()
+			return
+		mouseleave: ->
+			$(this).get(0).pause()
+			return
+	, '.gfy'
+
 	# star tokens
 	$('#video_star_tokens').tokenInput '/stars.json',
 		theme: 'bootstrap'

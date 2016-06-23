@@ -31,6 +31,10 @@
 	<%= f.label :thumb_url %><br>
 	<%= f.text_field :thumb_url, class: 'form-control' %>
 </div>
+<div class="form-group">
+	<%= f.label :gfy %><br>
+	<%= f.text_field :gfy, class: 'form-control' %>
+</div>
 
 <%= content_tag :p, link_to('Generate Thumbnails', generate_thumbs_video_path(@video), class: 'btn btn-info btn-sm') if @video.persisted? %>
 

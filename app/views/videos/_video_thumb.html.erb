@@ -2,7 +2,16 @@
 <div class="panel panel-default">
 
 	<%= link_to video, title: video_thumb_link_title(video), data: {toggle: :modal, target: '#defaultModal'} do %>
+
+	<% if video.gfy.present? %>
+		<video class="embed-responsive-item gfy" loop style="width: 100%;">
+			<source src="<%= video.gfy %>" />
+			Your browser does not support the video tag.
+		</video>
+	<% else %>
 	<%= image_tag video.thumb, class: 'video-thumb img-responsive center-block', data: { original: video.thumb, slides: (video.thumbnails.map(&:url) if video.thumbnails.any?) } %>
+	<% end %>
+
 	<% end %>
 
 	<div class="panel-body">
