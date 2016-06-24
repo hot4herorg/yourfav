@@ -15,8 +15,9 @@
 	<% end %>
 
 	<div class="panel-body">
+
 		<h4>
-			<%= video.title %>
+			<%= link_stars_in_str(video.stars, video.title) %>
 		</h4>
 
 		<%= render 'videos/video_actions', video: video, btn_size: :xs %>
