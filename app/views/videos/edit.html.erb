@@ -36,4 +36,4 @@
 
 <%= link_to 'Show', @video %> |
 <%= link_to 'Back', videos_path %> |
-<%= link_to 'Destroy', @video, method: :delete -%>
+<%= link_to 'Destroy', @video, data: { confirm: "Are you sure?" }, method: :delete -%>
