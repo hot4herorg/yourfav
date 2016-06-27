@@ -28,15 +28,21 @@
 	<%= f.select :site_id, Site.all.collect{ |s| [s.name, s.id] }, {include_blank: true}, class: 'form-control' %>
 </div>
 <div class="form-group">
+
 	<%= f.label :thumb_url %><br>
-	<%= f.text_field :thumb_url, class: 'form-control' %>
+	<div class="input-group">
+		<%= f.text_field :thumb_url, class: 'form-control' %>
+		<span class="input-group-btn">
+			<%= link_to('<i class="fa fa-fw fa-refresh"></i>'.html_safe, generate_thumbs_video_path(@video), class: 'btn btn-info') if @video.persisted? %>
+		</span>
+	</div><!-- /input-group -->
+
 </div>
 <div class="form-group">
 	<%= f.label :gfy %><br>
 	<%= f.text_field :gfy, class: 'form-control' %>
 </div>
 
-<%= content_tag :p, link_to('Generate Thumbnails', generate_thumbs_video_path(@video), class: 'btn btn-info btn-sm') if @video.persisted? %>
 
 <div class="form-group">
 	<%= f.label :star_tokens, 'Stars' %><br>
