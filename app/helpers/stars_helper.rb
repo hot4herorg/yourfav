@@ -10,6 +10,10 @@ module StarsHelper
 		end
 	end
 
+	def pmd_external_search_link(star)
+		link_to '<i class="fa fa-fw fa-stethoscope"></i>'.html_safe, "http://www.pornmd.com/straight/#{star.name}", class: 'btn btn-default btn-xs', target: '_blank'
+	end
+
 	def link_stars_in_str(stars, str)
 
 		stars_progression = []
