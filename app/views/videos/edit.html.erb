@@ -27,6 +27,16 @@
 	</div>
 
 	<div class="col-sm-6">
+
+		<% if @video.gfy.present? %>
+		<div class="embed-responsive embed-responsive-16by9 thumbnail">
+			<video class="embed-responsive-item gfy" loop autoplay>
+				<source src="<%= @video.gfy %>" />
+				Your browser does not support the video tag.
+			</video>
+		</div>
+		<% end %>
+
 		<div class="row">
 			<%= render @video.thumbnails %>
 		</div>
