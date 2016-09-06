@@ -13,10 +13,10 @@ class UsersController < ApplicationController
 	# GET /users/1.json
 	def show
 		@stars = @user.get_up_voted(Star)
-		if params[:feat_fav_stars].present?
-			@videos = Video.joins(:stars).where('stars.id' => @stars.ids.uniq).uniq.page(params[:page])
+		if params[:suggestions].present?
+			@videos = Video.of_stars(@stars).page(params[:page])
 		else
-			@videos = @user.get_up_voted(Video).page(params[:page])
+			@videos = @user.get_up_voted(Video).with_gfy(params[:with_gfy]).page(params[:page])
 		end
 	end
 

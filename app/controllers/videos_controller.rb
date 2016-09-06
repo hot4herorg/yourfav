@@ -6,8 +6,14 @@ class VideosController < ApplicationController
 	before_action :set_video, only: [:show, :edit, :update, :destroy, :generate_thumbs]
 
 	def index
-		@videos = Video.page(params[:page])
+		@videos = Video.with_gfy(params[:with_gfy]).page(params[:page])
 		@page_title = 'All Videos'
+	end
+
+	def with_gfy
+		@videos = Video.with_gfy(true).page(params[:page])
+		@page_title = 'Videos w/ Gfys'
+		render :index
 	end
 
 	def show

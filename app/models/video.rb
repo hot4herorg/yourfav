@@ -28,6 +28,9 @@ class Video < ActiveRecord::Base
 
 	default_scope { includes(:site, :thumbnails).order(created_at: :desc) }
 
+	scope :with_gfy, -> (bool=false) { where("gfy <> ''") if bool }
+	scope :of_stars, -> (stars) { joins(:stars).where('stars.id' => stars.ids.uniq).uniq }
+
 	def embed_code
 		self.site.embed_code.gsub("{{key}}", self.key)
 	end

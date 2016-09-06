@@ -16,6 +16,16 @@
 
 			<ul class="nav navbar-nav">
 				<%= content_tag :li, link_to('Videos', videos_path, id: 'navbar-videos') %>
+
+				<li id="video-scopes" class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+						<i class="fa fa-fw fa-video-camera"></i>
+					</a>
+					<ul class="dropdown-menu">
+						<%= content_tag :li, link_to('Videos w/ Gfys', with_gfy_videos_path) %>
+					</ul>
+				</li>
+
 				<%= content_tag :li, link_to('Favorites', user_path(current_user), id: 'navbar-favorites') if user_signed_in? %>
 				<%= content_tag :li, link_to('Galleries', user_galleries_path(current_user), id: 'navbar-galleries') if user_signed_in? %>
 				<%= link_to('Sign in', new_user_session_path, class: 'btn btn-sm btn-primary navbar-btn') unless user_signed_in? %>

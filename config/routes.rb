@@ -35,6 +35,7 @@ Rails.application.routes.draw do
 		resources :stars, controller: :video_stars
 		resources :gallery_videos, as: :gallery, path: :gallery, only: [:new]
 		# resources :thumbnails
+		get :with_gfy, on: :collection
 	end
 
 	resources :sites

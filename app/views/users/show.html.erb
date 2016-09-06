@@ -6,17 +6,20 @@
 
 <div class="row">
 	<div class="col-sm-8 col-md-9">
-		<p>
-			<ul class="nav nav-tabs">
-				<%= content_tag :li, link_to('Favorites', user_path(@user)), class: (params[:feat_fav_stars].present? ? nil : 'active') %>
-				<%= content_tag :li, link_to('Featuring Favorite Stars', user_path(@user, feat_fav_stars: true)), class: (params[:feat_fav_stars].present? ? 'active' : nil) %>
-			</ul>
-		</p>
+
+		<ul class="nav nav-tabs">
+			<%= content_tag :li, link_to('Videos', user_path(@user)) %>
+			<%= content_tag :li, link_to('w/ Gfy', user_path(@user, with_gfy: 1)) %>
+			<%= content_tag :li, link_to('Suggestions', user_path(@user, suggestions: true)) %>
+		</ul>
+
+		<br>
+
 		<% if @videos.any? %>
 		<%= render template: 'videos/index', layout: false %>
 		<% else %>
 		<p class="text-center lead">
-			<% unless params[:feat_fav_stars].present? %>
+			<% unless params[:suggestions].present? %>
 			This user has not Favorited any <%= link_to 'Videos', videos_path %>
 			<% else %>
 			This user has not Favorited any <%= link_to 'Stars', stars_path %>
